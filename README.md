@@ -1,7 +1,6 @@
 # Carbon TypeScript SDK
 
 [![License](https://img.shields.io/badge/license-GNU%20AGPL-blue)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.0.1-brightgreen)](https://github.com/carbon-host/carbon-typescript)
 [![TypeScript](https://img.shields.io/badge/types-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Build](https://img.shields.io/github/actions/workflow/status/carbon-host/carbon-typescript/ci.yml)](https://github.com/carbon-host/carbon-typescript/actions)
 [![npm](https://img.shields.io/npm/v/@carbonhost/typescript)](https://www.npmjs.com/package/@carbonhost/typescript)

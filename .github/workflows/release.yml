@@ -32,9 +32,6 @@ jobs:
         name: Run test
         run: bun test
 
-      - name: Build (if necessary)
-        run: bun run build
-
       - name: Publish to NPM
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

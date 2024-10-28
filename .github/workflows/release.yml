@@ -14,21 +14,22 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - id: checkout
+        name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Setup Bun
+      - id: setup-bun
+        name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Test
-        run: bun run test
+      - id: install-deps
+        name: Install dependencies
+        run: |
+          bun install
+      - id: test
+        name: Run test
+        run: |
+          bun test
 
       - name: Release
         env:

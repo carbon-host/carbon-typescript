@@ -18,11 +18,6 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.x'
-
       - id: setup-bun
         name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -37,16 +32,15 @@ jobs:
         name: Run test
         run: bun test
 
-      - name: Install semantic-release
-        run: bun add -d semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+      - name: Build (if necessary)
+        run: bun run build
 
-      - name: Release
+      - name: Publish to NPM
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          export PATH="/opt/hostedtoolcache/node/20.*/x64/bin:$PATH"
-          bunx semantic-release
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          bun publish
 
       - name: Upload Code Coverage
         uses: codecov/codecov-action@v3.1.0

@@ -27,10 +27,10 @@ import Carbon from '@carbonhost/typescript';
 
 const carbon = new Carbon({ apiKey: 'your-api-key' });
 
-// Example: Fetch all stars
-carbon.getStars().then((stars) => {
-  console.log(stars);
-});
+// Example: Fetch all stars (given top level await, otherwise fetch Promises accordingly)
+const stars = await carbon.getStars();
+
+console.log(stars);
 ```
 
 ## Documentation

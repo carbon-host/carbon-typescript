@@ -1,8 +1,8 @@
-import type {CarbonClient} from "@/index.ts";
+import type {Carbon} from "@/index.ts";
 import type {CarbonStarType} from "@/types/star.ts";
 
 export class CarbonStar {
-  private carbonClient: CarbonClient;
+  private carbonClient: Carbon;
 
   _id: string;
   containerId: string;
@@ -67,7 +67,7 @@ export class CarbonStar {
   lastBilled: Date;
   createdAt: Date;
 
-  constructor(carbonClient: CarbonClient, carbonStar: CarbonStarType) {
+  constructor(carbonClient: Carbon, carbonStar: CarbonStarType) {
     this.carbonClient = carbonClient;
 
     this._id = carbonStar._id;

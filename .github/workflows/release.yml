@@ -33,7 +33,7 @@ jobs:
           git commit -am "Update README.md to version ${{ env.VERSION }}"
           git push origin HEAD:${{ github.ref_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
   release:
     name: Release

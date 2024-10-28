@@ -2,6 +2,7 @@
   "name": "@carbonhost/typescript",
   "version": "0.0.1",
   "description": "Carbon TypeScript SDK",
+  "main": "src/index.ts",
   "author": {
     "name": "Carbon Host",
     "email": "contact@carbon.host",
@@ -11,6 +12,20 @@
     "type": "git",
     "url": "https://github.com/carbon-host/carbon-typescript"
   },
+  "license": "GNU AGPL",
+  "keywords": [
+    "carbon",
+    "typescript",
+    "sdk",
+    "hosting",
+    "carbonhost",
+    "minecraft",
+    "minecraft-server"
+  ],
+  "bugs": {
+    "url": "https://github.com/carbon-host/carbon-typescript/issues"
+  },
+  "homepage": "https://github.com/carbon-host/carbon-typescript",
   "module": "src/index.ts",
   "type": "module",
   "devDependencies": {

@@ -121,7 +121,28 @@ export class CarbonStar {
     return this.axios.get<StarStatus>("/status").then((res) => res.data);
   }
 
-  async uploadFile(file: File) {
+  async executeCommand(command: string) {
+    return this.axios.post("/command", {
+      command,
+    }).then((res) => res.data);
+  }
 
+  async uploadFile(file: File, path: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.axios.post<{ status: string; filePath: string }>(
+      "/files/upload",
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+
+        params: {
+          path,
+        },
+      }
+    ).then((res) => res.data);
   }
 }

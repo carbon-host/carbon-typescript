@@ -68,3 +68,7 @@ type Permissions = {
     paths?: string[];
   };
 }
+
+export type StarStatus = {
+  status: string;
+}

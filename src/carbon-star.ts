@@ -1,8 +1,11 @@
 import type {Carbon} from "@/index.ts";
-import type {CarbonStarType} from "@/types/star.ts";
+import type {CarbonStarType, StarStatus} from "@/types/star.ts";
+import type {AxiosInstance} from "axios";
+import axios from "axios";
 
 export class CarbonStar {
   private carbonClient: Carbon;
+  private axios: AxiosInstance
 
   _id: string;
   containerId: string;
@@ -67,8 +70,15 @@ export class CarbonStar {
   lastBilled: Date;
   createdAt: Date;
 
-  constructor(carbonClient: Carbon, carbonStar: CarbonStarType) {
+  constructor(carbonClient: Carbon, apiKey: string, carbonStar: CarbonStarType) {
     this.carbonClient = carbonClient;
+    this.axios = axios.create({
+      baseURL: `https://${carbonStar.domain.galaxyDomain}/v1/stars/${carbonStar._id}`,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+    })
 
     this._id = carbonStar._id;
     this.containerId = carbonStar.containerId;
@@ -101,5 +111,9 @@ export class CarbonStar {
   getDomain() {
     if (this.domain.url) return this.domain.url;
     return `${this.domain.galaxyIp}:${this.domain.port}`;
+  }
+
+  async getStatus() {
+    return this.axios.get<StarStatus>("/status").then(res => res.data)
   }
 }

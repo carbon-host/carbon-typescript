@@ -5,8 +5,10 @@ import {CarbonStar} from "@/carbon-star.ts";
 
 export class Carbon {
   private axios: AxiosInstance
+  private apiKey: string;
 
   constructor({ apiKey, url }: { apiKey: string, url?: string }) {
+    this.apiKey = apiKey;
     this.axios = axios.create({
       baseURL: url || "https://api.carbon.host",
       headers: {
@@ -26,11 +28,11 @@ export class Carbon {
 
   async getStars(): Promise<CarbonStar[]> {
     const stars = await this.fetchStars();
-    return stars.map(star => new CarbonStar(this, star));
+    return stars.map(star => new CarbonStar(this, this.apiKey, star));
   }
 
   async getStar(id: string): Promise<CarbonStar> {
     const star = await this.fetchStar(id);
-    return new CarbonStar(this, star);
+    return new CarbonStar(this, this.apiKey, star);
   }
 }

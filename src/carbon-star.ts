@@ -5,7 +5,7 @@ import axios from "axios";
 
 export class CarbonStar {
   private carbonClient: Carbon;
-  private axios: AxiosInstance
+  private axios: AxiosInstance;
 
   _id: string;
   containerId: string;
@@ -27,7 +27,7 @@ export class CarbonStar {
     url?: string;
     zoneId?: string;
     recordId?: string;
-  }
+  };
 
   subUsers: {
     userId: string;
@@ -70,15 +70,19 @@ export class CarbonStar {
   lastBilled: Date;
   createdAt: Date;
 
-  constructor(carbonClient: Carbon, apiKey: string, carbonStar: CarbonStarType) {
+  constructor(
+    carbonClient: Carbon,
+    apiKey: string,
+    carbonStar: CarbonStarType,
+  ) {
     this.carbonClient = carbonClient;
     this.axios = axios.create({
       baseURL: `https://${carbonStar.domain.galaxyDomain}/v1/stars/${carbonStar._id}`,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
       },
-    })
+    });
 
     this._id = carbonStar._id;
     this.containerId = carbonStar.containerId;
@@ -114,6 +118,10 @@ export class CarbonStar {
   }
 
   async getStatus() {
-    return this.axios.get<StarStatus>("/status").then(res => res.data)
+    return this.axios.get<StarStatus>("/status").then((res) => res.data);
+  }
+
+  async uploadFile(file: File) {
+
   }
 }

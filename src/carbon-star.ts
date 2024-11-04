@@ -1,6 +1,8 @@
-import type {Carbon} from "@/index.ts";
-import type {CarbonStarType, StarStatus} from "@/types/star.ts";
-import type {AxiosInstance} from "axios";
+import { FileManager } from "@/file-manager";
+import type { Carbon } from "@/index.ts";
+import { StatManager } from "@/stat-manager";
+import type { CarbonStarType, StarStatus } from "@/types/star.ts";
+import type { AxiosInstance } from "axios";
 import axios from "axios";
 
 export class CarbonStar {
@@ -117,32 +119,48 @@ export class CarbonStar {
     return `${this.domain.galaxyIp}:${this.domain.port}`;
   }
 
-  async getStatus() {
+  get files() {
+    return new FileManager(this, axios)
+  }
+
+  get stats(): StatManager {
+    return new StatManager(this, axios)
+  }
+
+  async getStatus(): Promise<StarStatus> {
     return this.axios.get<StarStatus>("/status").then((res) => res.data);
   }
 
+  async getUptime() {
+    return this.axios.get<{ uptime: number }>("/uptime").then((res) => res.data);
+  }
+
+  async setPower(action: "start" | "stop" | "restart" | "kill") {
+    return this.axios.post("/power", { action }).then((res) => res.data);
+  }
+
   async executeCommand(command: string) {
-    return this.axios.post("/command", {
-      command,
-    }).then((res) => res.data);
+    return this.axios
+      .post("/command", {
+        command,
+      })
+      .then((res) => res.data);
   }
 
   async uploadFile(file: File, path: string) {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
-    return this.axios.post<{ status: string; filePath: string }>(
-      "/files/upload",
-      formData,
-      {
+    return this.axios
+      .post<{ status: string; filePath: string }>("/files/upload", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
 
         params: {
           path,
         },
-      }
-    ).then((res) => res.data);
+      })
+      .then((res) => res.data);
   }
 }

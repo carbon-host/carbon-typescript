@@ -1,7 +1,7 @@
 import { FileManager } from "@/file-manager";
 import type { Carbon } from "@/index.ts";
 import { StatManager } from "@/stat-manager";
-import type { CarbonStarType, StarStatus } from "@/types/star.ts";
+import type { CarbonStarType, StarStatus, PortMapping, Protocol } from "@/types/star.ts";
 import type { AxiosInstance } from "axios";
 import axios from "axios";
 
@@ -10,67 +10,24 @@ export class CarbonStar {
   private axios: AxiosInstance;
 
   _id: string;
-  containerId: string;
   ownerId: string;
-
-  starName: string;
-  starType: string;
-  starVersion: string;
+  name: string;
+  type: string;
+  version: string;
   javaVersion: "21" | "17" | "11" | "8";
-
   storageId: string;
-  galaxyId: string;
+  ip: string;
+  galaxyURL: string;
 
-  domain: {
-    galaxyIp: string;
-    galaxyDomain: string;
-    port: number;
-
-    url?: string;
-    zoneId?: string;
-    recordId?: string;
+  resources: {
+    storage: number;
+    memory: number;
+    vCPU: number;
   };
 
-  subUsers: {
-    userId: string;
-    email: string;
-
-    permissions: {
-      power: {
-        read: boolean;
-        start: boolean;
-        stop: boolean;
-        restart: boolean;
-        kill: boolean;
-      };
-
-      console: {
-        read: boolean;
-        write: boolean;
-        executeCommand: boolean;
-      };
-
-      files: {
-        read: boolean;
-        write: boolean;
-        delete: boolean;
-        archive: boolean;
-        paths?: string[];
-      };
-    };
-    createdAt: number;
-  }[];
-  apiKeys: string[];
-
-  storageLimit: number;
-  memoryLimit: number;
-  cpuLimit: number;
-  ephemeral: boolean;
-
-  environmentVariables: Map<string, string>;
-
-  lastBilled: Date;
+  ports: PortMapping[];
   createdAt: Date;
+  lastBilled?: Date;
 
   constructor(
     carbonClient: Carbon,
@@ -79,7 +36,7 @@ export class CarbonStar {
   ) {
     this.carbonClient = carbonClient;
     this.axios = axios.create({
-      baseURL: `https://${carbonStar.domain.galaxyDomain}/v1/stars/${carbonStar._id}`,
+      baseURL: `https://${carbonStar?.ip}/v1/stars/${carbonStar._id}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
@@ -87,44 +44,39 @@ export class CarbonStar {
     });
 
     this._id = carbonStar._id;
-    this.containerId = carbonStar.containerId;
     this.ownerId = carbonStar.ownerId;
-
-    this.starName = carbonStar.starName;
-    this.starType = carbonStar.starType;
-    this.starVersion = carbonStar.starVersion;
+    this.name = carbonStar.name;
+    this.type = carbonStar.type;
+    this.version = carbonStar.version;
     this.javaVersion = carbonStar.javaVersion;
-
     this.storageId = carbonStar.storageId;
-    this.galaxyId = carbonStar.galaxyId;
+    this.ip = carbonStar.ip;
+    this.galaxyURL = carbonStar.galaxyURL;
 
-    this.domain = carbonStar.domain;
+    this.resources = {
+      storage: carbonStar.resources.storage,
+      memory: carbonStar.resources.memory,
+      vCPU: carbonStar.resources.vCPU
+    };
 
-    this.subUsers = carbonStar.subUsers;
-    this.apiKeys = carbonStar.apiKeys;
-
-    this.storageLimit = carbonStar.storageLimit;
-    this.memoryLimit = carbonStar.memoryLimit;
-    this.cpuLimit = carbonStar.cpuLimit;
-    this.ephemeral = carbonStar.ephemeral;
-
-    this.environmentVariables = carbonStar.environmentVariables;
-
-    this.lastBilled = carbonStar.lastBilled;
+    this.ports = carbonStar.ports;
     this.createdAt = carbonStar.createdAt;
+    this.lastBilled = carbonStar.lastBilled;
   }
 
-  getDomain() {
-    if (this.domain.url) return this.domain.url;
-    return `${this.domain.galaxyIp}:${this.domain.port}`;
+  getPublishedPort(targetPort: number, protocol: Protocol = 'tcp'): number | undefined {
+    const portMapping = this.ports.find(
+      port => port.targetPort === targetPort && port.protocols.includes(protocol)
+    );
+    return portMapping?.publishedPort;
   }
 
   get files() {
-    return new FileManager(this, axios)
+    return new FileManager(this, axios);
   }
 
-  get stats(): StatManager {
-    return new StatManager(this, axios)
+  get stats() {
+    return new StatManager(this, axios);
   }
 
   async getStatus(): Promise<StarStatus> {
@@ -156,7 +108,6 @@ export class CarbonStar {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-
         params: {
           path,
         },

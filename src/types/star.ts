@@ -1,72 +1,53 @@
 export type CarbonStarType = {
   _id: string;
-  containerId: string;
   ownerId: string;
-
-  starName: string;
-  starType: string;
-  starVersion: string;
+  name: string;
+  type: string;
+  version: string;
   javaVersion: "21" | "17" | "11" | "8";
-
   storageId: string;
-  galaxyId: string;
-
-  domain: Domain;
-
-  subUsers: SubUser[];
-  apiKeys: string[];
-
-  storageLimit: number;
-  memoryLimit: number;
-  cpuLimit: number;
-  ephemeral: boolean;
-
-  environmentVariables: Map<string, string>;
-
-  lastBilled: Date;
+  ip: string;
+  galaxyURL: string;
+  resources: {
+    storage: number;
+    memory: number;
+    vCPU: number;
+  };
+  ports: PortMapping[];
   createdAt: Date;
+  lastBilled?: Date;
 }
 
-type Domain = {
-  galaxyIp: string;
-  galaxyDomain: string;
-  port: number;
+/** Valid protocol types for Docker port mappings */
+export type Protocol = "tcp" | "udp" | "sctp";
 
-  url?: string;
-  zoneId?: string;
-  recordId?: string;
+/**
+ * Represents requested port configuration for a service
+ * @interface RequestedPortInfo
+ */
+export interface RequestedPortInfo {
+  protocols: Protocol[];
+  targetPort: number;
+  internalType?: "minecraft" | "carbon-plugin";
+  name?: string;
 }
 
-type SubUser = {
-  userId: string;
-  email: string;
-
-  permissions: Permissions;
-  createdAt: number;
+/**
+ * Extends RequestedPortInfo to include the published (external) port
+ * @interface PortMapping
+ * @extends {RequestedPortInfo}
+ */
+export interface PortMapping extends RequestedPortInfo {
+  publishedPort: number;
 }
 
-type Permissions = {
-  power: {
-    read: boolean;
-    start: boolean;
-    stop: boolean;
-    restart: boolean;
-    kill: boolean;
-  };
-
-  console: {
-    read: boolean;
-    write: boolean;
-    executeCommand: boolean;
-  };
-
-  files: {
-    read: boolean;
-    write: boolean;
-    delete: boolean;
-    archive: boolean;
-    paths?: string[];
-  };
+/**
+ * Defines resource limits for Docker services
+ * @interface ResourceLimits
+ */
+export interface ResourceLimits {
+  MemoryBytes: number;  // Memory limit in bytes
+  NanoCPUs: number;     // CPU limit in nano CPUs (1 CPU = 1e9)
 }
 
 export type StarStatus = {

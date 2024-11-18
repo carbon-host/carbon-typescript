@@ -9,10 +9,13 @@
     "lib": ["ESNext"],
     "module": "esnext",
     "target": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "moduleDetection": "force",
+
+    "declaration": true,
+    "noEmit": false,
     "allowImportingTsExtensions": true,
-    "noEmit": true,
+
     "composite": true,
     "strict": true,
     "downlevelIteration": true,

@@ -1,8 +1,11 @@
 {
   "name": "@carbonhost/typescript",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Carbon TypeScript SDK",
-  "module": "index.ts",
+
+  "type": "module",
+  "module": "./dist/index.js",
+
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": {

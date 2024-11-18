@@ -25,9 +25,17 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
 
-    "baseUrl": ".",
+    "baseUrl": ".", // Sets the base directory for relative paths
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+      "@/*": ["./src/*"] // Alias `@/` to `./src/`
+    },
+
+    // Enable incremental builds for faster recompilation
+    "incremental": true
+  },
+
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": ["node_modules", "dist"] // Exclude unnecessary files
 }

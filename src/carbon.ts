@@ -3,7 +3,6 @@ import type {CarbonStarType} from "@/types/star.ts";
 import {CarbonStar} from "@/carbon-star.ts";
 import axios from "axios";
 import type {CreateStarType} from "@/types/create-star.ts";
-import { inspect } from "bun";
 
 export class Carbon {
   private axios: AxiosInstance
@@ -49,7 +48,7 @@ export class Carbon {
       resources,
     }).then(res => res.data)
       .catch(err => {
-        console.log(inspect(err, { depth: Number.POSITIVE_INFINITY }))
+        console.log("Error creating star", err.data)
         throw err
       })
 

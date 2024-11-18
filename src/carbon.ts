@@ -4,7 +4,7 @@ import {CarbonStar} from "@/carbon-star.ts";
 import axios from "axios";
 import type {CreateStarType} from "@/types/create-star.ts";
 
-export class Carbon {
+export default class Carbon {
   private axios: AxiosInstance
   private apiKey: string;
 

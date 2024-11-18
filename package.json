@@ -1,6 +1,6 @@
 {
   "name": "@carbonhost/typescript",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Carbon TypeScript SDK",
   "module": "index.ts",
   "main": "dist/index.js",

@@ -2,9 +2,9 @@
   "name": "@carbonhost/typescript",
   "version": "0.0.7",
   "description": "Carbon TypeScript SDK",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./src/index.ts",
+  "module": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": {
     "name": "Carbon Host",
     "email": "contact@carbon.host",
@@ -28,20 +28,15 @@
     "url": "https://github.com/carbon-host/carbon-typescript/issues"
   },
   "homepage": "https://github.com/carbon-host/carbon-typescript",
-  "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "rimraf": "^6.0.1"
   },
   "scripts": {
-    "build": "bun build ./src/index.ts --outdir dist"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./src/index.ts"
-    }
+    "build": "bun build --target=node ./src/index.ts --outfile=dist/index.js && bun run build:declaration",
+    "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
+    "postbuild": "rimraf tsconfig.types.tsbuildinfo"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -53,5 +48,9 @@
     "branches": [
       "master"
     ]
-  }
+  },
+  "files": [
+    "dist/*.js",
+    "dist/*.d.ts"
+  ]
 }

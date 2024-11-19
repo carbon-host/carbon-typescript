@@ -23,7 +23,6 @@
         "useButtonType": "off"
       },
       "style": {
-        "useImportType": "off",
         "noNonNullAssertion": "off"
       },
       "suspicious": {

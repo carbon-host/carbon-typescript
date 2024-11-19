@@ -1,8 +1,9 @@
 import type {AxiosInstance} from "axios";
-import type {CarbonStarType} from "@/types/star.ts";
-import {CarbonStar} from "@/carbon-star.ts";
 import axios from "axios";
-import type {CreateStarType} from "@/types/create-star.ts";
+import type {CarbonStarType} from "./types/star";
+import {CarbonStar} from "./carbon-star";
+import type {CreateStarType} from "./types/create-star";
+import type {UserInfo} from "./types/user";
 
 export default class Carbon {
   private axios: AxiosInstance
@@ -17,6 +18,10 @@ export default class Carbon {
         "Authorization": `Bearer ${apiKey}`,
       },
     });
+  }
+
+  async getMe() {
+    return this.axios.get<UserInfo>("/v1/me").then(res => res.data)
   }
 
   private async fetchStars() {

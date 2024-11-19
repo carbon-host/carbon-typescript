@@ -1,11 +1,13 @@
-import { FileManager } from "@/file-manager";
-import type { Carbon } from "@/index.ts";
-import { StatManager } from "@/stat-manager";
-import type { CarbonStarType, StarStatus, PortMapping, Protocol } from "@/types/star.ts";
+
 import type { AxiosInstance } from "axios";
 import axios from "axios";
+import type Carbon from "./carbon";
+import type {CarbonStarType, PortMapping, Protocol, StarStatus} from "./types/star";
+import {FileManager} from "./file-manager";
+import {StatManager} from "./stat-manager";
 
 export class CarbonStar {
+  // @ts-ignore
   private carbonClient: Carbon;
   private axios: AxiosInstance;
 

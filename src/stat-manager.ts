@@ -1,8 +1,10 @@
-import type { CarbonStar } from "@/carbon-star";
-import type { CarbonStarStats } from "@/types/stats";
+
 import type { AxiosInstance } from "axios";
+import type {CarbonStar} from "./carbon-star";
+import type {CarbonStarStats} from "./types/stats";
 
 export class StatManager {
+  // @ts-ignore
   private star: CarbonStar;
   private axios: AxiosInstance;
 

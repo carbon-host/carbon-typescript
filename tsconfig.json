@@ -13,7 +13,7 @@
     "moduleDetection": "force",
 
     "declaration": true,
-    "noEmit": false,
+    "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true,
 
     "composite": true,

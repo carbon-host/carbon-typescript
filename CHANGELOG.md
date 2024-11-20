@@ -1,5 +1,11 @@
 # @carbonhost/typescript
 
+## 0.0.15
+
+### Patch Changes
+
+- 0ffa9cf: include files in package.json
+
 ## 0.0.14
 
 ### Patch Changes

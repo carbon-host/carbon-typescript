@@ -1,5 +1,11 @@
 # @carbonhost/typescript
 
+## 0.0.16
+
+### Patch Changes
+
+- 48f3005: Change to use domain url instead of ip
+
 ## 0.0.15
 
 ### Patch Changes

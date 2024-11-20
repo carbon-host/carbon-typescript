@@ -12,6 +12,7 @@ export class CarbonStar {
   private axios: AxiosInstance;
 
   _id: string;
+  serviceName: string;
   ownerId: string;
   name: string;
   type: string;
@@ -46,6 +47,7 @@ export class CarbonStar {
     });
 
     this._id = carbonStar._id;
+    this.serviceName = carbonStar.serviceName;
     this.ownerId = carbonStar.ownerId;
     this.name = carbonStar.name;
     this.type = carbonStar.type;

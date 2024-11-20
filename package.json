@@ -49,5 +49,8 @@
     "branches": [
       "master"
     ]
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

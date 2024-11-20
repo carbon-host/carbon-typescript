@@ -4,6 +4,7 @@ import type {CarbonStarType} from "./types/star";
 import {CarbonStar} from "./carbon-star";
 import type {CreateStarType} from "./types/create-star";
 import type {UserInfo} from "./types/user";
+import type {APIKeyType, CreateAPIKeyResponseType, CreateAPIKeyType, VerifyAPIKeyResponseType} from "./types/api-keys";
 
 export default class Carbon {
   private axios: AxiosInstance
@@ -22,6 +23,30 @@ export default class Carbon {
 
   async getMe() {
     return this.axios.get<UserInfo>("/v1/me").then(res => res.data)
+  }
+
+  async createAPIKey({ name, description, type }: CreateAPIKeyType) {
+    return this.axios.post<CreateAPIKeyResponseType>("/v1/api-keys", {
+      name,
+      description,
+      type,
+    }).then(res => res.data)
+  }
+
+  async getAPIKey(apiKeyId: string) {
+    return this.axios.get<APIKeyType>(`/v1/api-keys/${apiKeyId}`).then(res => res.data)
+  }
+
+  async getAPIKeys() {
+    return this.axios.get<APIKeyType[]>("/v1/api-keys").then(res => res.data)
+  }
+
+  async verifyAPIKey(apiKey: string) {
+    return this.axios.post<VerifyAPIKeyResponseType>("/v1/api-keys/verify", {token: apiKey}).then(res => res.data)
+  }
+
+  async deleteAPIKey(apiKeyId: string) {
+    return this.axios.delete<{ message: string }>(`/v1/api-keys/${apiKeyId}`).then(res => res.data)
   }
 
   private async fetchStars() {

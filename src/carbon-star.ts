@@ -38,7 +38,7 @@ export class CarbonStar {
   ) {
     this.carbonClient = carbonClient;
     this.axios = axios.create({
-      baseURL: `https://${carbonStar?.ip}/v1/stars/${carbonStar._id}`,
+      baseURL: `https://${carbonStar?.galaxyURL}/v1/stars/${carbonStar._id}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,

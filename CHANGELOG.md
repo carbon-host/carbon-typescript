@@ -1,5 +1,11 @@
 # @carbonhost/typescript
 
+## 0.0.18
+
+### Patch Changes
+
+- 64c651d: update star schema to include serviceName
+
 ## 0.0.17
 
 ### Patch Changes

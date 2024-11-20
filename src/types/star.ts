@@ -1,5 +1,6 @@
 export type CarbonStarType = {
   _id: string;
+  serviceName: string;
   ownerId: string;
   name: string;
   type: string;

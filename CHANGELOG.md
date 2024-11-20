@@ -1,5 +1,11 @@
 # @carbonhost/typescript
 
+## 0.0.17
+
+### Patch Changes
+
+- 6c4fa0f: Add support for api keys
+
 ## 0.0.16
 
 ### Patch Changes

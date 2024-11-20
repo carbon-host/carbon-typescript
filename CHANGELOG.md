@@ -1,5 +1,11 @@
 # @carbonhost/typescript
 
+## 0.0.19
+
+### Patch Changes
+
+- aff16bb: change to use frozen lockfile
+
 ## 0.0.18
 
 ### Patch Changes

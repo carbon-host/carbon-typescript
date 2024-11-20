@@ -3,8 +3,9 @@ import type { AxiosInstance } from "axios";
 import axios from "axios";
 import type Carbon from "./carbon";
 import type {CarbonStarType, PortMapping, Protocol, StarStatus} from "./types/star";
-import {FileManager} from "./file-manager";
-import {StatManager} from "./stat-manager";
+import {FileManager} from "./managers/file-manager";
+import {StatManager} from "./managers/stat-manager";
+import {MinecraftManager} from "./managers/minecraft-manager";
 
 export class CarbonStar {
   // @ts-ignore
@@ -75,6 +76,10 @@ export class CarbonStar {
     return portMapping?.publishedPort;
   }
 
+  get minecraft() {
+    return new MinecraftManager(this, axios);
+  }
+
   get files() {
     return new FileManager(this, axios);
   }
@@ -88,7 +93,11 @@ export class CarbonStar {
   }
 
   async getUptime() {
-    return this.axios.get<{ uptime: number }>("/uptime").then((res) => res.data);
+    // EX:
+    // {
+    //   "uptime": "65852.76s"
+    // }
+    return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data);
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {

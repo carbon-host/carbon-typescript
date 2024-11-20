@@ -6,7 +6,7 @@ import type {CreateStarType} from "./types/create-star";
 import type {UserInfo} from "./types/user";
 import type {APIKeyType, CreateAPIKeyResponseType, CreateAPIKeyType, VerifyAPIKeyResponseType} from "./types/api-keys";
 
-export default class Carbon {
+export class Carbon {
   private axios: AxiosInstance
   private apiKey: string;
 

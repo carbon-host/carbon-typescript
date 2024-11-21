@@ -4,3 +4,5 @@ export { CarbonStar } from "./carbon-star";
 export * from "./types/star";
 export * from "./types/create-star";
 export * from "./types/user";
+
+export * from "./file-manager/types";

@@ -3,9 +3,9 @@ import type { AxiosInstance } from "axios";
 import axios from "axios";
 import type {Carbon} from "./carbon";
 import type {CarbonStarType, PortMapping, Protocol, StarStatus} from "./types/star";
-import {FileManager} from "./managers/file-manager";
 import {StatManager} from "./managers/stat-manager";
 import {MinecraftManager} from "./managers/minecraft-manager";
+import {FileManager} from "./file-manager";
 
 export class CarbonStar {
   // @ts-ignore

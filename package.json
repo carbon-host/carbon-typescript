@@ -1,13 +1,13 @@
 {
   "name": "@carbonhost/typescript",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
-    "publish": "pnpm run build && pnpm publish",
+    "release:local": "pnpm run build && pnpm publish",
     "lint": "tsc"
   },
   "packageManager": "pnpm@9.13.2",

@@ -77,15 +77,15 @@ export class CarbonStar {
   }
 
   get minecraft() {
-    return new MinecraftManager(this, axios);
+    return new MinecraftManager(this, this.axios);
   }
 
   get files() {
-    return new FileManager(this, axios);
+    return new FileManager(this, this.axios);
   }
 
   get stats() {
-    return new StatManager(this, axios);
+    return new StatManager(this, this.axios);
   }
 
   async getStatus(): Promise<StarStatus> {

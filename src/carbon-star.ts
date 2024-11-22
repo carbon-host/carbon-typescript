@@ -101,7 +101,7 @@ export class CarbonStar {
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {
-    return this.axios.post("/power", { action }).then((res) => res.data);
+    return this.carbonClient.getAxios().put(`/v1/stars/${this._id}/power`, { action }).then((res) => res.data);
   }
 
   async executeCommand(command: string) {

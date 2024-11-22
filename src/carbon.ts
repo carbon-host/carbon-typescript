@@ -70,6 +70,9 @@ export class Carbon {
         console.log("Error creating star", err.data)
         throw err
       })
+  }
 
+  getAxios() {
+    return this.axios;
   }
 }

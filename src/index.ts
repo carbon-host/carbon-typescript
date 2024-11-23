@@ -6,3 +6,4 @@ export * from "./types/create-star";
 export * from "./types/user";
 
 export * from "./file-manager/types";
+export * from "./carbon-plugin/types";

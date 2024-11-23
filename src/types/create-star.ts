@@ -9,7 +9,7 @@ export type CreateStarType = {
   ports: RequestedPortInfo[];
   resources: {
     // storage: number;
-    // memory: number;
-    vCPU: number;
+    memory: number;
+    // vCPU: number;
   };
 }

@@ -2,6 +2,7 @@
 import type { AxiosInstance } from "axios";
 import type {CarbonStarStats} from "../types/stats";
 import type {CarbonStar} from "../carbon-star";
+import type {CarbonPluginCommandResponse} from "../carbon-plugin/types";
 
 export class MinecraftManager {
   private star: CarbonStar;
@@ -18,7 +19,7 @@ export class MinecraftManager {
   }
 
   async getCommands(query: string) {
-    return this.axios.get<{ commands: string[] }>("/commands", {
+    return this.axios.get<CarbonPluginCommandResponse>("/commands", {
       params: {
         query,
       },

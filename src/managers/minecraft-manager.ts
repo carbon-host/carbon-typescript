@@ -16,4 +16,12 @@ export class MinecraftManager {
     const port = this.star.ports.find(port => port.internalType === "minecraft")?.publishedPort ?? this.star.getPublishedPort(25565);
     return `${this.star.ip}:${port}`
   }
+
+  async getCommands(query: string) {
+    return this.axios.get<{ commands: string[] }>("/commands", {
+      params: {
+        query,
+      },
+    }).then((res) => res.data);
+  }
 }

@@ -97,7 +97,8 @@ export class CarbonStar {
     // {
     //   "uptime": "65852.76s"
     // }
-    return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data);
+    return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data)
+      .then((res) => res.uptime);
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {

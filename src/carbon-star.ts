@@ -89,6 +89,10 @@ export class CarbonStar {
     return new StatManager(this, this.axios);
   }
 
+  async delete() {
+    return this.carbonClient.getAxios().delete(`/v1/stars/${this._id}`).then((res) => res.data);
+  }
+
   async update(request: UpdateStarType) {
     return this.carbonClient.getAxios().put(`/v1/stars/${this._id}/update`, request).then((res) => res.data);
   }

@@ -6,6 +6,7 @@ import type {CarbonStarType, PortMapping, Protocol, StarStatus} from "./types/st
 import {StatManager} from "./managers/stat-manager";
 import {MinecraftManager} from "./managers/minecraft-manager";
 import {FileManager} from "./file-manager";
+import type {UpdateStarType} from "./types/create-star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -88,15 +89,15 @@ export class CarbonStar {
     return new StatManager(this, this.axios);
   }
 
+  async updateContainer(request: UpdateStarType) {
+    return this.axios.put("/update", request).then((res) => res.data);
+  }
+
   async getStatus(): Promise<StarStatus> {
     return this.axios.get<StarStatus>("/status").then((res) => res.data);
   }
 
   async getUptime() {
-    // EX:
-    // {
-    //   "uptime": "65852.76s"
-    // }
     return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data)
       .then((res) => res.uptime);
   }

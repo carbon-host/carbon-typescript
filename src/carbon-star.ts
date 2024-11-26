@@ -93,6 +93,12 @@ export class CarbonStar {
     return this.axios.put("/update", request).then((res) => res.data);
   }
 
+  async rename(name: string) {
+    return this.axios.put("/name", {
+      name,
+    }).then((res) => res.data);
+  }
+
   async getStatus(): Promise<StarStatus> {
     return this.axios.get<StarStatus>("/status").then((res) => res.data);
   }

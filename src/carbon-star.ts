@@ -94,7 +94,7 @@ export class CarbonStar {
   }
 
   async rename(name: string) {
-    return this.axios.put("/name", {
+    return this.carbonClient.getAxios().put(`/v1/stars/${this._id}/name`, {
       name,
     }).then((res) => res.data);
   }

@@ -89,7 +89,7 @@ export class CarbonStar {
     return new StatManager(this, this.axios);
   }
 
-  async updateContainer(request: UpdateStarType) {
+  async update(request: UpdateStarType) {
     return this.axios.put("/update", request).then((res) => res.data);
   }
 

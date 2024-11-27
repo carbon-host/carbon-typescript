@@ -1,3 +1,8 @@
+export interface Pagination {
+  limit: number;
+  offset: number;
+}
+
 export interface CarbonStarStats {
     onlinePlayers: number
     ramUsage: number
@@ -19,3 +24,19 @@ export interface CarbonStarStats {
       maxPlayers: number
     }
   }
+
+export interface CarbonPluginPlayerInfo {
+  name: string;
+  uuid: string;
+}
+
+export interface CarbonPluginPlayersResponse {
+  pagination: Pagination;
+  data: {
+    players: CarbonPluginPlayerInfo[];
+    countInfo: {
+      onlinePlayers: number;
+      maxPlayers: number;
+    };
+  };
+}

@@ -1,6 +1,6 @@
 
 import type { AxiosInstance } from "axios";
-import type {CarbonPluginInfo, CarbonStarStats} from "../types/carbon-plugin";
+import type {CarbonPluginInfo, CarbonPluginPlayersResponse, CarbonStarStats} from "../types/carbon-plugin";
 import type {CarbonStar} from "../carbon-star";
 import type {CarbonPluginCommandResponse} from "../carbon-plugin/types";
 
@@ -28,5 +28,14 @@ export class MinecraftManager {
 
   async getInfo() {
     return this.axios.get<CarbonPluginInfo>("/carbon-plugin").then((res) => res.data);
+  }
+
+  async getPlayers(limit?: number, offset?: number) {
+    return this.axios.get<CarbonPluginPlayersResponse>("/carbon-plugin/players", {
+      params: {
+        limit,
+        offset,
+      },
+    }).then((res) => res.data);
   }
 }

@@ -17,20 +17,17 @@ export class BackupManager {
     // get-backups
 
     async getBackups() {
-        return this.axios.get<Backup[]>("/backups", {
-            params: {
-                starId: this.star._id
-            }
-        }).then(res => res.data)
+        return this.axios.get<Backup[]>("/backups").then(res => res.data)
     }
 
     async getBackup(backupId: string) {
         return this.axios.get<Backup>(`/backups/${backupId}`).then(res => res.data)
     }
 
-    async createBackup(paths?: string[]) {
+    async createBackup({name, paths}: { name: string, paths: string[] }) {
         return this.axios.post<{ status: string, message: string }>("/backups", {
-            paths,
+            name,
+            paths
         }).then(res => res.data);
     }
 

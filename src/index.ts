@@ -7,3 +7,4 @@ export * from "./types/user";
 
 export * from "./file-manager/types";
 export * from "./carbon-plugin/types";
+export * from "./backups/types";

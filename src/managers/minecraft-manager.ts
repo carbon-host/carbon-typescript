@@ -25,4 +25,14 @@ export class MinecraftManager {
       },
     }).then((res) => res.data);
   }
+
+  // TODO: Make this ping the `/` endpoint
+  async isCarbonPluginInstalled() {
+    try {
+      await this.axios.get("/commands?query=carbon");
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

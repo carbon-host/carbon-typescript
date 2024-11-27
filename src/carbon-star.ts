@@ -7,6 +7,7 @@ import {StatManager} from "./managers/stat-manager";
 import {MinecraftManager} from "./managers/minecraft-manager";
 import {FileManager} from "./file-manager";
 import type {UpdateStarType} from "./types/create-star";
+import {BackupManager} from "./backups";
 
 export class CarbonStar {
   // @ts-ignore
@@ -87,6 +88,10 @@ export class CarbonStar {
 
   get stats() {
     return new StatManager(this, this.axios);
+  }
+
+  get backups() {
+    return new BackupManager(this, this.axios);
   }
 
   async delete() {

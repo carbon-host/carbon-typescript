@@ -19,7 +19,7 @@ export class MinecraftManager {
   }
 
   async getCommands(query: string) {
-    return this.axios.get<CarbonPluginCommandResponse>("/commands", {
+    return this.axios.get<CarbonPluginCommandResponse>("/carbon-plugin/commands", {
       params: {
         query,
       },

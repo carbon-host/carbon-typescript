@@ -1,6 +1,6 @@
 
 import type { AxiosInstance } from "axios";
-import type {CarbonStarStats} from "../types/stats";
+import type {CarbonPluginInfo, CarbonStarStats} from "../types/carbon-plugin";
 import type {CarbonStar} from "../carbon-star";
 import type {CarbonPluginCommandResponse} from "../carbon-plugin/types";
 
@@ -26,13 +26,7 @@ export class MinecraftManager {
     }).then((res) => res.data);
   }
 
-  // TODO: Make this ping the `/` endpoint
-  async isCarbonPluginInstalled() {
-    try {
-      await this.axios.get("/commands?query=carbon");
-      return true;
-    } catch (e) {
-      return false;
-    }
+  async getInfo() {
+    return this.axios.get<CarbonPluginInfo>("/carbon-plugin").then((res) => res.data);
   }
 }

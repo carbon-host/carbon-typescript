@@ -1,7 +1,7 @@
 
 import type { AxiosInstance } from "axios";
 import type {CarbonStar} from "../carbon-star";
-import type {CarbonStarStats} from "../types/stats";
+import type {CarbonStarStats} from "../types/carbon-plugin";
 
 export class StatManager {
   // @ts-ignore

@@ -24,6 +24,14 @@ export class BackupManager {
         return this.axios.get<Backup>(`/backups/${backupId}`).then(res => res.data)
     }
 
+    async deleteBackup(backupId: string) {
+        return this.axios.delete(`/backups/${backupId}`).then(res => res.data)
+    }
+
+    async downloadBackup(backupId: string) {
+        return this.axios.get<{ url: string }>(`/backups/${backupId}/download`).then(res => res.data)
+    }
+
     async createBackup({name, paths}: { name: string, paths: string[] }) {
         return this.axios.post<{ status: string, message: string }>("/backups", {
             name,

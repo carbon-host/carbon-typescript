@@ -28,6 +28,20 @@ export interface CarbonStarStats {
 export interface CarbonPluginPlayerInfo {
   name: string;
   uuid: string;
+
+  firstPlayed: number;
+  lastSeen: number;
+  lastLogin: number;
+
+  isOp: boolean;
+  idleDuration: number;
+  ping: number;
+  location: {
+    x: number;
+    y: number;
+    z: number;
+    world: string;
+  };
 }
 
 export interface CarbonPluginPlayersResponse {

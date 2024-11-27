@@ -11,11 +11,6 @@ export class BackupManager {
         this.axios = axios;
     }
 
-    // create-backup
-    // get-backup
-    // restore-backup
-    // get-backups
-
     async getBackups() {
         return this.axios.get<Backup[]>("/backups").then(res => res.data)
     }

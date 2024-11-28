@@ -2,8 +2,10 @@ export type Backup = {
     _id: string;
 
     type: "snapshot" | "backup";
-    starId?: string;
     ownerId?: string;
+    starId?: string;
+    starType?: string;
+    starVersion?: string;
 
     snapshotFolderName: string;
     snapshotName: string;

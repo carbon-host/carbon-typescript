@@ -25,6 +25,12 @@ export class CarbonStar {
   ip: string;
   galaxyURL: string;
 
+  subUsers: {
+    userId: string;
+    minecraftUUID?: string;
+    email: string;
+  }[]
+
   resources: {
     storage: number;
     memory: number;
@@ -59,6 +65,8 @@ export class CarbonStar {
     this.storageId = carbonStar.storageId;
     this.ip = carbonStar.ip;
     this.galaxyURL = carbonStar.galaxyURL;
+
+    this.subUsers = carbonStar.subUsers;
 
     this.resources = {
       storage: carbonStar.resources.storage,

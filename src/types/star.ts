@@ -13,7 +13,7 @@ export type CarbonStarType = {
   galaxyURL: string;
   subUsers: {
     userId: string;
-    minecraftUUID: string;
+    minecraftUUID?: string;
     email: string;
   }[]
   resources: {

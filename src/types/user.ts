@@ -3,7 +3,7 @@ export interface UserInfo {
   stripeId: string | null;
 
   email: string;
-  minecraftUUID: string;
+  minecraftUUID?: string;
 
   plan: "pro" | "enterprise" | null;
   credits: number;

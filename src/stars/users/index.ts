@@ -15,7 +15,7 @@ export class UserManager {
 
   async inviteUser(email: string) {
     return this.controllerAxios
-      .post<{ success: boolean }>(`/v1/stars/${this.star._id}/invites`, {
+      .post<{ success: boolean }>(`/v1/stars/${this.star._id}/users/invites`, {
         email,
       })
       .then((res) => res.data);
@@ -23,13 +23,13 @@ export class UserManager {
 
   async getInvites() {
     return this.controllerAxios
-      .get<{ invites: Invite[] }>(`/v1/stars/${this.star._id}/invites`)
+      .get<{ invites: Invite[] }>(`/v1/stars/${this.star._id}/users/invites`)
       .then((res) => res.data.invites);
   }
 
   async cancelInvite(inviteId: string) {
     return this.controllerAxios
-      .delete(`/v1/stars/${this.star._id}/invites/${inviteId}`)
+      .delete(`/v1/stars/${this.star._id}/users/invites/${inviteId}`)
       .then((res) => res.data);
   }
 }

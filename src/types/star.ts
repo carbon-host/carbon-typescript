@@ -11,6 +11,11 @@ export type CarbonStarType = {
   storageId: string;
   ip: string;
   galaxyURL: string;
+  subUsers: {
+    userId: string;
+    minecraftUUID: string;
+    email: string;
+  }[]
   resources: {
     storage: number;
     memory: number;

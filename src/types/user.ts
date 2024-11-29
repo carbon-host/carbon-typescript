@@ -2,6 +2,9 @@ export interface UserInfo {
   clerkId: string;
   stripeId: string | null;
 
+  email: string;
+  minecraftUUID: string;
+
   plan: "pro" | "enterprise" | null;
   credits: number;
   redeemedGifts: string[]; // Gift IDs

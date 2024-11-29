@@ -38,4 +38,8 @@ export class MinecraftManager {
       },
     }).then((res) => res.data);
   }
+
+  async installCarbonPlugin() {
+    return this.axios.post("/carbon-plugin/install").then((res) => res.data);
+  }
 }

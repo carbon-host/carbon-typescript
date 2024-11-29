@@ -32,4 +32,10 @@ export class UserManager {
       .delete(`/v1/stars/${this.star._id}/users/invites/${inviteId}`)
       .then((res) => res.data);
   }
+
+  async removeUser(userId: string) {
+    return this.controllerAxios
+      .delete(`/v1/stars/${this.star._id}/users/${userId}`)
+      .then((res) => res.data);
+  }
 }

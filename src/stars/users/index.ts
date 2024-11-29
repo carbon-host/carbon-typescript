@@ -11,14 +11,11 @@ export class UserManager {
     this.star = star;
     this.axios = axios;
     this.controllerAxios = star.carbonClient.getAxios()
-
-    // set base url to /v1/stars/{starId}/users
-    this.controllerAxios.defaults.baseURL = `${this.controllerAxios.defaults.baseURL}/v1/stars/${star._id}/users`
   }
 
   async inviteUser(email: string) {
     return this.controllerAxios
-      .post<{ success: boolean }>("/invites", {
+      .post<{ success: boolean }>(`/v1/stars/${this.star._id}/invites`, {
         email,
       })
       .then((res) => res.data);
@@ -26,13 +23,13 @@ export class UserManager {
 
   async getInvites() {
     return this.controllerAxios
-      .get<{ invites: Invite[] }>("/invites")
+      .get<{ invites: Invite[] }>(`/v1/stars/${this.star._id}/invites`)
       .then((res) => res.data.invites);
   }
 
   async cancelInvite(inviteId: string) {
     return this.controllerAxios
-      .delete(`/invites/${inviteId}`)
+      .delete(`/v1/stars/${this.star._id}/invites/${inviteId}`)
       .then((res) => res.data);
   }
 }

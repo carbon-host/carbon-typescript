@@ -12,7 +12,7 @@ import {UserManager} from "./stars/users";
 
 export class CarbonStar {
   // @ts-ignore
-  private carbonClient: Carbon;
+  carbonClient: Carbon;
   private axios: AxiosInstance;
 
   _id: string;

@@ -4,8 +4,9 @@ import type {CarbonStarType} from "./types/star";
 import {CarbonStar} from "./carbon-star";
 import type {CreateStarType} from "./types/create-star";
 import type {UserInfo} from "./types/user";
-import type {APIKeyType, CreateAPIKeyResponseType, CreateAPIKeyType, VerifyAPIKeyResponseType} from "./types/api-keys";
+import type {CreateAPIKeyResponseType, CreateAPIKeyType} from "./types/api-keys";
 import {APIKeyManager} from "./managers/api-key-manager";
+import {InviteManager} from "./invites";
 
 export class Carbon {
   private axios: AxiosInstance
@@ -14,7 +15,7 @@ export class Carbon {
   constructor({ apiKey, url }: { apiKey: string, url?: string }) {
     this.apiKey = apiKey;
     this.axios = axios.create({
-      baseURL: url || "https://api.carbon.host",
+      baseURL: url || "https://staging.api.carbon.host",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`,
@@ -36,6 +37,10 @@ export class Carbon {
 
   get apiKeys() {
     return new APIKeyManager(this.axios);
+  }
+
+  get inviteManager() {
+    return new InviteManager(this.axios);
   }
 
   private async fetchStars() {

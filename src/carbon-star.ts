@@ -8,6 +8,7 @@ import {MinecraftManager} from "./managers/minecraft-manager";
 import {FileManager} from "./file-manager";
 import type {UpdateStarType} from "./types/create-star";
 import {BackupManager} from "./backups";
+import {UserManager} from "./stars/users";
 
 export class CarbonStar {
   // @ts-ignore
@@ -84,6 +85,10 @@ export class CarbonStar {
       port => port.targetPort === targetPort && port.protocols.includes(protocol)
     );
     return portMapping?.publishedPort;
+  }
+
+  get users() {
+    return new UserManager(this, this.axios)
   }
 
   get minecraft() {

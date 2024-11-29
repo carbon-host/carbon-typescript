@@ -23,8 +23,8 @@ export class UserManager {
 
   async getInvites() {
     return this.controllerAxios
-      .get<{ invites: Invite[] }>(`/v1/stars/${this.star._id}/users/invites`)
-      .then((res) => res.data.invites);
+      .get<Invite[]>(`/v1/stars/${this.star._id}/users/invites`)
+      .then((res) => res.data);
   }
 
   async cancelInvite(inviteId: string) {

@@ -121,6 +121,10 @@ export class CarbonStar {
     }).then((res) => res.data);
   }
 
+  async getLogs() {
+    return this.axios.get<{ logs: string }>("/logs").then((res) => res.data);
+  }
+
   async getStatus(): Promise<StarStatus> {
     return this.axios.get<StarStatus>("/status").then((res) => res.data);
   }

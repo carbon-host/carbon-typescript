@@ -104,7 +104,7 @@ export class CarbonStar {
   }
 
   get backups() {
-    return new BackupManager(this, this.axios);
+    return new BackupManager(this, this.axios, this.carbonClient.getAxios());
   }
 
   async delete() {

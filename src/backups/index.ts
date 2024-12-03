@@ -5,28 +5,31 @@ import type {Backup} from "./types";
 export class BackupManager {
     private star: CarbonStar;
     private axios: AxiosInstance;
+    private controllerAxios: AxiosInstance;
 
-    constructor(star: CarbonStar, axios: AxiosInstance) {
+    constructor(star: CarbonStar, axios: AxiosInstance, controllerAxios: AxiosInstance) {
         this.star = star;
         this.axios = axios;
+        this.controllerAxios = controllerAxios;
     }
 
     async getBackups() {
-        return this.axios.get<Backup[]>("/backups").then(res => res.data)
+        return this.controllerAxios.get<Backup[]>(`/v1/stars/${this.star._id}/backups`).then(res => res.data)
     }
 
     async getBackup(backupId: string) {
-        return this.axios.get<Backup>(`/backups/${backupId}`).then(res => res.data)
+        return this.controllerAxios.get<Backup>(`/v1/stars/${this.star._id}/backups/${backupId}`).then(res => res.data) 
     }
 
     async deleteBackup(backupId: string) {
-        return this.axios.delete(`/backups/${backupId}`).then(res => res.data)
+        return this.controllerAxios.delete(`/v1/stars/${this.star._id}/backups/${backupId}`).then(res => res.data)
     }
 
     async downloadBackup(backupId: string) {
-        return this.axios.get<{ url: string }>(`/backups/${backupId}/download`).then(res => res.data)
+        return this.controllerAxios.get<{ url: string }>(`/v1/stars/${this.star._id}/backups/${backupId}/download`).then(res => res.data)
     }
 
+    // Daemon Only
     async createBackup({name, paths}: { name: string, paths: string[] }) {
         return this.axios.post<{ status: string, message: string }>("/backups", {
             name,

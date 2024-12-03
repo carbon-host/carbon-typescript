@@ -1,6 +1,6 @@
 
 import type { AxiosInstance } from "axios";
-import type {CarbonPluginInfo, CarbonPluginPlayersResponse, CarbonStarStats} from "../carbon-plugin/types";
+import type {CarbonPluginInfo, CarbonPluginPlayersResponse} from "../carbon-plugin/types";
 import type {CarbonStar} from "../carbon-star";
 import type {CarbonPluginCommandResponse} from "../carbon-plugin/types";
 

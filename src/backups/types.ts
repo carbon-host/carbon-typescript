@@ -1,18 +1,20 @@
 export type Backup = {
     _id: string;
 
-    type: "snapshot" | "backup";
-    ownerId?: string;
-    starId?: string;
-    starType?: string;
-    starVersion?: string;
+    ownerId: string;
+    starId: string;
 
-    snapshotFolderName: string;
-    snapshotName: string;
-    snapshotDescription?: string;
-    snapshotSize: number;
+    name: string;
+    description?: string;
 
-    bucketName: string;
+    starType: string;
+    starVersion?: string; // Don't show for CUSTOM jars
+
+    s3: {
+        key: string; // Path to the backup (archive name)
+        size: number; // Bytes
+        bucket: string;
+    },
 
     createdAt: Date;
 }

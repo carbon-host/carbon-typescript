@@ -27,10 +27,9 @@ export class BackupManager {
         return this.axios.get<{ url: string }>(`/backups/${backupId}/download`).then(res => res.data)
     }
 
-    async createBackup({name, type, paths}: { name: string, type: "backup" | "snapshot", paths: string[] }) {
+    async createBackup({name, paths}: { name: string, paths: string[] }) {
         return this.axios.post<{ status: string, message: string }>("/backups", {
             name,
-            type,
             paths
         }).then(res => res.data);
     }

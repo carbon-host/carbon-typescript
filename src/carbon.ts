@@ -61,16 +61,8 @@ export class Carbon {
     return new CarbonStar(this, this.apiKey, star);
   }
 
-  async createStar({ name, type, customJar, version, javaVersion, ports, resources }: CreateStarType) {
-    return this.axios.post("/v1/stars", {
-      name,
-      type,
-      customJar,
-      version,
-      javaVersion,
-      ports,
-      resources,
-    }).then(res => res.data)
+  async createStar(body: CreateStarType) {
+    return this.axios.post("/v1/stars", body).then(res => res.data)
       .catch(err => {
         console.log("Error creating star", err.data)
         throw err

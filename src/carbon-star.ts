@@ -1,4 +1,3 @@
-
 import type { AxiosInstance } from "axios";
 import axios from "axios";
 import type {Carbon} from "./carbon";
@@ -9,6 +8,7 @@ import {FileManager} from "./file-manager";
 import type {UpdateStarType} from "./types/create-star";
 import {BackupManager} from "./backups";
 import {UserManager} from "./stars/users";
+import type {AdvancedConfig} from "./types/create-star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -41,6 +41,9 @@ export class CarbonStar {
   ports: PortMapping[];
   createdAt: Date;
   lastBilled?: Date;
+
+  billingCycle: "monthly" | "hourly";
+  advanced: AdvancedConfig;
 
   constructor(
     carbonClient: Carbon,
@@ -78,6 +81,9 @@ export class CarbonStar {
     this.ports = carbonStar.ports;
     this.createdAt = carbonStar.createdAt;
     this.lastBilled = carbonStar.lastBilled;
+
+    this.billingCycle = carbonStar.billingCycle;
+    this.advanced = carbonStar.advanced || {};
   }
 
   getPublishedPort(targetPort: number, protocol: Protocol = 'tcp'): number | undefined {

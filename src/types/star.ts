@@ -11,19 +11,66 @@ export type CarbonStarType = {
   storageId: string;
   ip: string;
   galaxyURL: string;
+  
   subUsers: {
     userId: string;
     minecraftUUID?: string;
     email: string;
-  }[]
+    createdAt: Date;
+  }[];
+
   resources: {
     storage: number;
     memory: number;
     vCPU: number;
   };
+
   ports: PortMapping[];
-  createdAt: Date;
+
+  advanced: {
+    useAikarFlags: boolean;
+    plugins?: string[];
+    mods?: string[];
+    
+    world: {
+      url?: string;
+      forceOnStart: boolean;
+      allowNether: boolean;
+      spawnAnimals: boolean;
+      spawnMonsters: boolean;
+      spawnNPCs: boolean;
+      spawnProtection?: number;
+      generateStructures: boolean;
+      maxWorldSize?: number;
+    };
+
+    whitelist?: {
+      enabled: boolean;
+      players: string[];
+    };
+
+    resourcePack?: {
+      url?: string;
+      sha1?: string;
+      enforce: boolean;
+    };
+
+    commandBlocks: boolean;
+    hardcore: boolean;
+    pvp: boolean;
+    onlineMode: boolean;
+    seed?: string;
+    defaultGameMode: "survival" | "creative" | "adventure" | "spectator";
+    motd?: string;
+    difficulty?: "peaceful" | "easy" | "normal" | "hard";
+    icon?: string;
+    maxPlayers?: number;
+    timezone: string;
+  };
+
   lastBilled?: Date;
+  billingCycle: "monthly" | "hourly";
+  createdAt: Date;
 }
 
 /** Valid protocol types for Docker port mappings */

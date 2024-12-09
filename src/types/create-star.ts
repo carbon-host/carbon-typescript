@@ -1,30 +1,64 @@
 import type {RequestedPortInfo} from "./star.ts";
 
-type starType = "VANILLA" | "PAPER" | "PUFFERFISH" | "PURPUR" | "FOLIA" | "VELOCITY" | "WATERFALL" | "FORGE" | "FABRIC" | "CUSTOM";
+export type StarType = "VANILLA" | "PAPER" | "PUFFERFISH" | "PURPUR" | "FOLIA" | "VELOCITY" | "WATERFALL" | "FORGE" | "FABRIC" | "CUSTOM";
+
+export type WorldConfig = {
+  url?: string;
+  forceOnStart?: boolean;
+  allowNether?: boolean;
+  spawnAnimals?: boolean;
+  spawnMonsters?: boolean;
+  spawnNPCs?: boolean;
+  spawnProtection?: number;
+  generateStructures?: boolean;
+  maxWorldSize?: number;
+  viewDistance?: number;
+  simulationDistance?: number;
+}
+
+export type WhitelistConfig = {
+  enabled?: boolean;
+  players?: string[];
+}
+
+export type ResourcePackConfig = {
+  url?: string;
+  sha1?: string;
+  enforce?: boolean;
+}
+
+export type AdvancedConfig = {
+  billingCycle?: "monthly" | "hourly";
+  useAikarFlags?: boolean;
+  plugins?: string[];
+  mods?: string[];
+  world?: WorldConfig;
+  whitelist?: WhitelistConfig;
+  resourcePack?: ResourcePackConfig;
+  commandBlocks?: boolean;
+  hardcore?: boolean;
+  pvp?: boolean;
+  onlineMode?: boolean;
+  seed?: string;
+  defaultGameMode?: "survival" | "creative" | "adventure" | "spectator";
+  motd?: string;
+  difficulty?: "peaceful" | "easy" | "normal" | "hard";
+  icon?: string;
+  maxPlayers?: number;
+  timezone?: string;
+}
 
 export type CreateStarType = {
+  eula?: boolean;
   name: string;
-  type: starType
+  type: StarType;
   customJar?: string;
   version?: string;
   javaVersion: "8" | "11" | "17" | "21";
-  ports: RequestedPortInfo[];
   resources: {
     memory: number;
   };
+  advanced?: AdvancedConfig;
 }
 
-export type UpdateStarType = {
-  type?: starType
-  customJar?: string;
-  version?: string;
-  javaVersion?: "8" | "11" | "17" | "21";
-  ports?: RequestedPortInfo[];
-
-  // Not current implemented, we will support this in the future
-  // We need to handle the payment, how much we charge, etc.
-  // This is easy with hourly billing, hard with monthly.
-  // resources: {
-  //   memory: number;
-  // };
-}
+export type UpdateStarType = Partial<CreateStarType>;

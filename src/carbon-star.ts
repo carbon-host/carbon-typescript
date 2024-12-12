@@ -118,7 +118,7 @@ export class CarbonStar {
   }
 
   async update(request: UpdateStarType) {
-    return this.carbonClient.getAxios().put(`/v1/stars/${this._id}/update`, request).then((res) => res.data);
+    return this.carbonClient.getAxios().patch(`/v1/stars/${this._id}`, request).then((res) => res.data);
   }
 
   async rename(name: string) {

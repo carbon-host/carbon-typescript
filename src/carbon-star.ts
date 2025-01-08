@@ -151,7 +151,7 @@ export class CarbonStar {
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {
-    return this.axios.put("/v1/power", { action }).then((res) => res.data);
+    return this.axios.put("/power", { action }).then((res) => res.data);
   }
 
   async executeCommand(command: string) {

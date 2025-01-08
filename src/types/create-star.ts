@@ -1,4 +1,3 @@
-import type {RequestedPortInfo} from "./star.ts";
 
 export type StarType = "VANILLA" | "PAPER" | "PUFFERFISH" | "PURPUR" | "FOLIA" | "VELOCITY" | "WATERFALL" | "FORGE" | "FABRIC" | "CUSTOM";
 

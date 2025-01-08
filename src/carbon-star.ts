@@ -16,21 +16,27 @@ export class CarbonStar {
   private axios: AxiosInstance;
 
   _id: string;
-  serviceName: string;
   ownerId: string;
+
   name: string;
   type: string;
+  customJar?: string;
   version: string;
   javaVersion: "21" | "17" | "11" | "8";
+
+  containerId: string;
+  galaxyId: string;
   storageId: string;
+
   ip: string;
   galaxyURL: string;
 
   subUsers: {
     userId: string;
-    minecraftUUID?: string;
     email: string;
-  }[]
+    minecraftUUID?: string;
+    createdAt: Date;
+  }[];
 
   resources: {
     storage: number;
@@ -60,13 +66,17 @@ export class CarbonStar {
     });
 
     this._id = carbonStar._id;
-    this.serviceName = carbonStar.serviceName;
     this.ownerId = carbonStar.ownerId;
     this.name = carbonStar.name;
     this.type = carbonStar.type;
+    this.customJar = carbonStar.customJar;
     this.version = carbonStar.version;
     this.javaVersion = carbonStar.javaVersion;
+
+    this.containerId = carbonStar.containerId;
+    this.galaxyId = carbonStar.galaxyId;
     this.storageId = carbonStar.storageId;
+
     this.ip = carbonStar.ip;
     this.galaxyURL = carbonStar.galaxyURL;
 
@@ -83,7 +93,7 @@ export class CarbonStar {
     this.lastBilled = carbonStar.lastBilled;
 
     this.billingCycle = carbonStar.billingCycle;
-    this.advanced = carbonStar.advanced || {};
+    this.advanced = carbonStar.advanced;
   }
 
   getPublishedPort(targetPort: number, protocol: Protocol = 'tcp'): number | undefined {
@@ -141,7 +151,7 @@ export class CarbonStar {
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {
-    return this.carbonClient.getAxios().put(`/v1/stars/${this._id}/power`, { action }).then((res) => res.data);
+    return this.axios.put("/v1/power", { action }).then((res) => res.data);
   }
 
   async executeCommand(command: string) {

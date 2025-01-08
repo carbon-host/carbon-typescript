@@ -1,4 +1,3 @@
-import { z } from "zod";
 
 export type Protocol = "tcp" | "udp" | "sctp";
 
@@ -45,7 +44,7 @@ export type CarbonStarType = {
     useAikarFlags: boolean;
     plugins?: string[];
     mods?: string[];
-    
+
     world: {
       url?: string;
       forceOnStart: boolean;

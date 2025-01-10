@@ -23,7 +23,8 @@ export class CarbonStar {
   version: string;
   javaVersion: "21" | "17" | "11" | "8";
 
-  serverId: string;
+  serverId: number;
+  clientId: string;
   galaxyId: string;
 
   ip: string;
@@ -59,10 +60,11 @@ export class CarbonStar {
     this.javaVersion = carbonStar.javaVersion;
 
     this.serverId = carbonStar.serverId;
+    this.clientId = carbonStar.clientId;
     this.galaxyId = carbonStar.galaxyId;
 
     this.ip = carbonStar.ip;
-    this.galaxyId = carbonStar.galaxyId;
+    this.subdomain = carbonStar.subdomain;
 
     this.resources = {
       storage: carbonStar.resources.storage,

@@ -8,7 +8,8 @@ export type CarbonStarType = {
   version: string;
   javaVersion: "21" | "17" | "11" | "8";
   
-  serverId: string;
+  clientId: string;
+  serverId: number;
   galaxyId: string;
 
   ip: string;

@@ -53,12 +53,12 @@ export class Carbon {
 
   async getStars(): Promise<CarbonStar[]> {
     const stars = await this.fetchStars();
-    return stars.map(star => new CarbonStar(this, this.apiKey, star));
+    return stars.map(star => new CarbonStar(this, star));
   }
 
   async getStar(id: string): Promise<CarbonStar> {
     const star = await this.fetchStar(id);
-    return new CarbonStar(this, this.apiKey, star);
+    return new CarbonStar(this, star);
   }
 
   async createStar(body: CreateStarType) {

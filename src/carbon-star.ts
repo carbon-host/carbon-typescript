@@ -1,14 +1,13 @@
 import type { AxiosInstance } from "axios";
 import axios from "axios";
-import type {Carbon} from "./carbon";
-import type {CarbonStarType, PortMapping, Protocol, StarStatus} from "./types/star";
-import {StatManager} from "./managers/stat-manager";
-import {MinecraftManager} from "./managers/minecraft-manager";
-import {FileManager} from "./file-manager";
-import type {UpdateStarType} from "./types/create-star";
-import {BackupManager} from "./backups";
-import {UserManager} from "./stars/users";
-import type {AdvancedConfig} from "./types/create-star";
+import { BackupManager } from "./backups";
+import type { Carbon } from "./carbon";
+import { FileManager } from "./file-manager";
+import { MinecraftManager } from "./managers/minecraft-manager";
+import { StatManager } from "./managers/stat-manager";
+import { UserManager } from "./stars/users";
+import type { UpdateStarType } from "./types/create-star";
+import type { CarbonStarType, StarStatus } from "./types/star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -24,19 +23,11 @@ export class CarbonStar {
   version: string;
   javaVersion: "21" | "17" | "11" | "8";
 
-  containerId: string;
+  serverId: string;
   galaxyId: string;
-  storageId: string;
 
   ip: string;
-  galaxyURL: string;
-
-  subUsers: {
-    userId: string;
-    email: string;
-    minecraftUUID?: string;
-    createdAt: Date;
-  }[];
+  subdomain?: string;
 
   resources: {
     storage: number;
@@ -44,43 +35,40 @@ export class CarbonStar {
     vCPU: number;
   };
 
-  ports: PortMapping[];
   createdAt: Date;
   lastBilled?: Date;
 
   billingCycle: "monthly" | "hourly";
-  advanced: AdvancedConfig;
 
   constructor(
     carbonClient: Carbon,
-    apiKey: string,
+    // apiKey: string,
     carbonStar: CarbonStarType,
   ) {
     this.carbonClient = carbonClient;
-    this.axios = axios.create({
-      baseURL: `https://${carbonStar?.galaxyURL}/v1/stars/${carbonStar._id}`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-    });
+    this.axios = carbonClient.getAxios();
+    // this.axios = axios.create({
+    //   baseURL: `https://${carbonStar?.galaxyURL}/v1/stars/${carbonStar._id}`,
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${apiKey}`,
+    //   },
+    // });
 
     this._id = carbonStar._id;
     this.ownerId = carbonStar.ownerId;
+
     this.name = carbonStar.name;
     this.type = carbonStar.type;
     this.customJar = carbonStar.customJar;
     this.version = carbonStar.version;
     this.javaVersion = carbonStar.javaVersion;
 
-    this.containerId = carbonStar.containerId;
+    this.serverId = carbonStar.serverId;
     this.galaxyId = carbonStar.galaxyId;
-    this.storageId = carbonStar.storageId;
 
     this.ip = carbonStar.ip;
-    this.galaxyURL = carbonStar.galaxyURL;
-
-    this.subUsers = carbonStar.subUsers;
+    this.galaxyId = carbonStar.galaxyId;
 
     this.resources = {
       storage: carbonStar.resources.storage,
@@ -88,21 +76,12 @@ export class CarbonStar {
       vCPU: carbonStar.resources.vCPU
     };
 
-    this.ports = carbonStar.ports;
     this.createdAt = carbonStar.createdAt;
     this.lastBilled = carbonStar.lastBilled;
 
     this.billingCycle = carbonStar.billingCycle;
-    this.advanced = carbonStar.advanced;
   }
-
-  getPublishedPort(targetPort: number, protocol: Protocol = 'tcp'): number | undefined {
-    const portMapping = this.ports.find(
-      port => port.targetPort === targetPort && port.protocols.includes(protocol)
-    );
-    return portMapping?.publishedPort;
-  }
-
+  
   get users() {
     return new UserManager(this, this.axios)
   }

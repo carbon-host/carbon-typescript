@@ -46,7 +46,7 @@ export class CarbonStar {
     carbonStar: CarbonStarType,
   ) {
     this.carbonClient = carbonClient;
-    this.axios = carbonClient.getAxios()
+    this.axios = axios.create(carbonClient.getAxios().defaults)
     this.axios.defaults.baseURL = `${this.axios.defaults.baseURL}/v1/stars/${carbonStar._id}`
 
     this._id = carbonStar._id;

@@ -46,14 +46,8 @@ export class CarbonStar {
     carbonStar: CarbonStarType,
   ) {
     this.carbonClient = carbonClient;
-    this.axios = carbonClient.getAxios();
-    // this.axios = axios.create({
-    //   baseURL: `https://${carbonStar?.galaxyURL}/v1/stars/${carbonStar._id}`,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${apiKey}`,
-    //   },
-    // });
+    this.axios = carbonClient.getAxios()
+    this.axios.defaults.baseURL = `${this.axios.defaults.baseURL}/v1/stars/${carbonStar._id}`
 
     this._id = carbonStar._id;
     this.ownerId = carbonStar.ownerId;

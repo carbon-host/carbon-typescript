@@ -7,7 +7,7 @@ import { MinecraftManager } from "./managers/minecraft-manager";
 import { StatManager } from "./managers/stat-manager";
 import { UserManager } from "./stars/users";
 import type { UpdateStarType } from "./types/create-star";
-import type { CarbonStarType, StarStatus } from "./types/star";
+import type { CarbonStarType, StarResources, StarStatus } from "./types/star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -81,7 +81,7 @@ export class CarbonStar {
 
     this.billingCycle = carbonStar.billingCycle;
   }
-  
+
   get users() {
     return new UserManager(this, this.axios)
   }
@@ -120,13 +120,18 @@ export class CarbonStar {
     return this.axios.get<{ logs: string }>("/logs").then((res) => res.data);
   }
 
-  async getStatus(): Promise<StarStatus> {
-    return this.axios.get<StarStatus>("/status").then((res) => res.data);
-  }
+  // async getStatus(): Promise<StarStatus> {
+  //   return this.axios.get<StarStatus>("/status").then((res) => res.data);
+  // }
 
-  async getUptime() {
-    return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data)
-      .then((res) => res.uptime);
+  // async getUptime() {
+  //   return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data)
+  //     .then((res) => res.uptime);
+  // }
+
+
+  async getResources() {
+    return this.axios.get<StarResources>("/resources").then((res) => res.data); 
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {

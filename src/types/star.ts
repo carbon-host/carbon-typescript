@@ -30,3 +30,16 @@ export type CarbonStarType = {
 export type StarStatus = {
   status: string;
 }
+
+export type StarResources = {
+  currentState: string;
+  isSuspended: boolean;
+  resources: {
+    memoryBytes: number;  
+    cpuAbsolute: number;
+    diskBytes: number;
+    networkRxBytes: number;
+    networkTxBytes: number;
+    uptime: number;
+  };
+};

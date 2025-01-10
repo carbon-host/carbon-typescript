@@ -13,10 +13,10 @@ export class MinecraftManager {
     this.axios = axios;
   }
 
-  getJoinableDomain() {
-    const port = this.star.ports.find(port => port.internalType === "minecraft")?.publishedPort ?? this.star.getPublishedPort(25565);
-    return `${this.star.ip}:${port}`
-  }
+  // getJoinableDomain() {
+  //   const port = this.star.ports.find(port => port.internalType === "minecraft")?.publishedPort ?? this.star.getPublishedPort(25565);
+  //   return `${this.star.ip}:${port}`
+  // }
 
   async getCommands(query: string) {
     return this.axios.get<CarbonPluginCommandResponse>("/carbon-plugin/commands", {

@@ -112,18 +112,10 @@ export class CarbonStar {
     }).then((res) => res.data);
   }
 
-  async getLogs() {
-    return this.axios.get<{ logs: string }>("/logs").then((res) => res.data);
+  async getWebsocketInfo() {
+    return this.axios.get
   }
 
-  // async getStatus(): Promise<StarStatus> {
-  //   return this.axios.get<StarStatus>("/status").then((res) => res.data);
-  // }
-
-  // async getUptime() {
-  //   return this.axios.get<{ uptime: string }>("/uptime").then((res) => res.data)
-  //     .then((res) => res.uptime);
-  // }
 
 
   async getResources() {

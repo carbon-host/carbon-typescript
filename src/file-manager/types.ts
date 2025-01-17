@@ -1,19 +1,28 @@
 export type FileInfo = {
   name: string;
-  parentDirectory: string;
-  isDirectory: boolean;
-  fileType: "file" | "directory";
+  mode: string;
   size: number;
-  lastModified: string;
+  isFile: boolean;
+  isSymlink: boolean;
+  isEditable: boolean;
+  mimetype: string;
+  createdAt: string;
+  modifiedAt: string;
 };
 
-export type FetchedFileInfo = {
-  name: string;
-  lastModified: string;
-  size: number;
-};
+// export type FetchedFileInfo = {
+//   name: string;
+//   mode: string;
+//   size: number;
+//   isFile: boolean;
+//   isSymlink: boolean;
+//   isEditable: boolean;
+//   mimetype: string;
+//   createdAt: string;
+//   modifiedAt: string;
+// };
 
-export type ListFilesResponse = {
-  directories: FetchedFileInfo[];
-  files: FetchedFileInfo[];
-};
+// export type ListFilesResponse = {
+//   directories: FetchedFileInfo[];
+//   files: FetchedFileInfo[];
+// };

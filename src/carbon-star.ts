@@ -116,8 +116,6 @@ export class CarbonStar {
     return this.axios.get
   }
 
-
-
   async getResources() {
     return this.axios.get<StarResources>("/resources").then((res) => res.data); 
   }

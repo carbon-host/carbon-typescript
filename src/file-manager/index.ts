@@ -27,8 +27,9 @@ export class FileManager {
         return this.axios.put("/files/write", { path, content })
     }
 
-    async moveFile(sourcePath: string, destinationPath: string) {
-        return this.axios.post("/files/move", { source: sourcePath, target: destinationPath })
+
+    async moveFiles(path: string, files: { from: string, to: string }[]) {
+        return this.axios.post("/files/move", { path, files })
     }
 
     async renameFile(path: string, name: string) {
@@ -65,35 +66,7 @@ export class FileManager {
         return this.axios.post("/files/decompress", { root, file })
     }
 
-    async compressFiles(root: string, files: string[] ) {
+    async compressFiles(root: string, files: string[]) {
         return this.axios.post("/files/compress", { root, files })
     }
 }
-
-// function convertListFiles(parentDirectory: string, listFilesResponse: ListFilesResponse) {
-//     const fileList: FileInfo[] = [];
-
-//     listFilesResponse.directories.forEach((dir) => {
-//         fileList.push({
-//             name: dir.name,
-//             parentDirectory: parentDirectory,
-//             isDirectory: true,
-//             fileType: "directory" as const,
-//             size: dir.size,
-//             lastModified: dir.lastModified,
-//         });
-//     });
-
-//     listFilesResponse.files.forEach((file) => {
-//         fileList.push({
-//             name: file.name,
-//             parentDirectory: parentDirectory,
-//             isDirectory: false,
-//             fileType: "file" as const,
-//             size: file.size,
-//             lastModified: file.lastModified,
-//         });
-//     });
-
-//     return fileList;
-// }

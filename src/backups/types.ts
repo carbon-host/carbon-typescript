@@ -1,7 +1,6 @@
 export type Backup = {
     _id: string;
-
-    ownerId: string;
+    uuid: string;
     starId: string;
 
     name: string;
@@ -10,11 +9,19 @@ export type Backup = {
     starType: string;
     starVersion?: string; // Don't show for CUSTOM jars
 
-    s3: {
-        key: string; // Path to the backup (archive name)
-        size: number; // Bytes
-        bucket: string;
-    },
+    bytes: number;
+    checksum: string;
+    ignoredFiles: string[];
+    locked: boolean;
+    successful: boolean;
 
+    completedAt: Date | null;
     createdAt: Date;
+}
+
+export type CreateBackup = {
+    name: string;
+    description?: string;
+    ignored?: string[];
+    isLocked?: boolean;
 }

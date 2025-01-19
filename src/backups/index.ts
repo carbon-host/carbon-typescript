@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 import type { CarbonStar } from "../carbon-star";
-import type {Backup} from "./types";
+import type {Backup, CreateBackup} from "./types";
 
 export class BackupManager {
     private star: CarbonStar;
@@ -29,12 +29,8 @@ export class BackupManager {
         return this.controllerAxios.get<{ url: string }>(`/v1/stars/${this.star._id}/backups/${backupId}/download`).then(res => res.data)
     }
 
-    // Daemon Only
-    async createBackup({name, paths}: { name: string, paths: string[] }) {
-        return this.axios.post<{ status: string, message: string }>("/backups", {
-            name,
-            paths
-        }).then(res => res.data);
+    async createBackup(backup: CreateBackup) {
+        return this.axios.post<Backup>("/backups", backup).then(res => res.data);
     }
 
     async restoreBackup(backupId: string) {

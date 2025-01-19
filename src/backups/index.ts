@@ -34,7 +34,7 @@ export class BackupManager {
     }
 
     async restoreBackup(backupId: string) {
-        return this.axios.put<{ status: string, message: string }>(`/backups/${backupId}/restore`).then(res => res.data);
+        return this.axios.post<{ status: string, message: string }>(`/backups/${backupId}/restore`).then(res => res.data);
     }
 
 }

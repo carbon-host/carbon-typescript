@@ -1,6 +1,5 @@
 import type { AxiosInstance } from "axios";
 import type { CarbonStar } from "../carbon-star";
-import type {Backup, CreateBackup, Port} from "./types";
 
 export class PortManager {
     private star: CarbonStar;

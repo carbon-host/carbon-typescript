@@ -16,4 +16,11 @@ export type CreateStarType = {
   advanced?: AdvancedConfig;
 }
 
-export type UpdateStarType = Partial<CreateStarType>;
+
+export type UpdateStarType = {
+  name?: string;
+  type?: StarType;
+  customJar?: string;
+  version?: string;
+  javaVersion?: "8" | "11" | "17" | "21";
+}

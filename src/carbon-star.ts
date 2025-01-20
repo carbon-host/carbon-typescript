@@ -8,6 +8,7 @@ import { StatManager } from "./managers/stat-manager";
 import { UserManager } from "./stars/users";
 import type { UpdateStarType } from "./types/create-star";
 import type { CarbonStarType, StarResources, StarStatus } from "./types/star";
+import { PortManager } from "./ports";
 
 export class CarbonStar {
   // @ts-ignore
@@ -96,6 +97,10 @@ export class CarbonStar {
 
   get backups() {
     return new BackupManager(this, this.axios, this.carbonClient.getAxios());
+  }
+
+  get ports() {
+    return new PortManager(this, this.axios);
   }
 
   async delete() {

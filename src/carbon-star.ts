@@ -31,6 +31,13 @@ export class CarbonStar {
   ip: string;
   subdomain?: string;
 
+  subUsers: {
+    _id: string,
+    clerkId: string,
+    email: string,
+    minecraftUUID: string,
+  }[]
+
   resources: {
     storage: number;
     memory: number;
@@ -66,6 +73,8 @@ export class CarbonStar {
 
     this.ip = carbonStar.ip;
     this.subdomain = carbonStar.subdomain;
+
+    this.subUsers = carbonStar.subUsers;
 
     this.resources = {
       storage: carbonStar.resources.storage,

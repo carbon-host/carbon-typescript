@@ -15,6 +15,13 @@ export type CarbonStarType = {
   ip: string;
   subdomain?: string;
 
+  subUsers: {
+    _id: string,
+    clerkId: string,
+    email: string,
+    minecraftUUID: string,
+  }[]
+
   resources: {
       storage: number;
       memory: number;

@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 import type { CarbonStar } from "../carbon-star";
-import type { FileInfo } from "./types";
+import type { ChmodOptions, FileInfo } from "./types";
 
 export class FileManager {
     private star: CarbonStar;
@@ -27,6 +27,9 @@ export class FileManager {
         return this.axios.put("/files/write", { path, content })
     }
 
+    async chmod(options: ChmodOptions) {
+        return this.axios.post("/files/chmod", options)
+    }
 
     async moveFiles(path: string, files: { from: string, to: string }[]) {
         return this.axios.post("/files/move", { path, files })

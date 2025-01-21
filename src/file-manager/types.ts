@@ -8,3 +8,12 @@ export type FileInfo = {
   createdAt: string;
   modifiedAt: string;
 };
+
+export type ChmodOptions = {
+  path: string,
+  files: {
+    file: string,
+    mode: number,
+  }[]
+};
+

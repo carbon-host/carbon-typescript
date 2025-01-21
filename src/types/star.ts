@@ -7,6 +7,7 @@ export type CarbonStarType = {
   customJar?: string;
   version: string;
   javaVersion: "21" | "17" | "11" | "8";
+  startupCommand?: string;
   
   clientId: string;
   serverId: number;

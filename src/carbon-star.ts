@@ -23,6 +23,7 @@ export class CarbonStar {
   customJar?: string;
   version: string;
   javaVersion: "21" | "17" | "11" | "8";
+  startupCommand?: string;
 
   serverId: number;
   clientId: string;
@@ -66,6 +67,7 @@ export class CarbonStar {
     this.customJar = carbonStar.customJar;
     this.version = carbonStar.version;
     this.javaVersion = carbonStar.javaVersion;
+    this.startupCommand = carbonStar.startupCommand;
 
     this.serverId = carbonStar.serverId;
     this.clientId = carbonStar.clientId;

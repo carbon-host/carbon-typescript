@@ -2,6 +2,7 @@ export type StarType = "VANILLA" | "PAPER" | "PUFFERFISH" | "PURPUR" | "FOLIA" |
 
 export type AdvancedConfig = {
   billingCycle?: "monthly" | "hourly";
+  startupCommand?: string;
 }
 
 export type CreateStarType = {
@@ -23,4 +24,5 @@ export type UpdateStarType = {
   customJar?: string;
   version?: string;
   javaVersion?: "8" | "11" | "17" | "21";
+  startupCommand?: string;
 }

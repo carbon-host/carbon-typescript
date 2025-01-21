@@ -40,6 +40,6 @@ export class MinecraftManager {
   }
 
   async installCarbonPlugin(port: number) {
-    return this.axios.post("/carbon-plugin/install", port).then((res) => res.data);
+    return this.axios.post("/carbon-plugin/install", { port }).then((res) => res.data);
   }
 }

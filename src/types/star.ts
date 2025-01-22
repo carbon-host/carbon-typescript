@@ -29,6 +29,7 @@ export type CarbonStarType = {
       vCPU: number;
   };
 
+  suspended: boolean;
 
   lastBilled?: Date;
   billingCycle: "monthly" | "hourly";

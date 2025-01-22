@@ -45,6 +45,8 @@ export class CarbonStar {
     vCPU: number;
   };
 
+  suspended: boolean;
+
   createdAt: Date;
   lastBilled?: Date;
 
@@ -83,6 +85,8 @@ export class CarbonStar {
       memory: carbonStar.resources.memory,
       vCPU: carbonStar.resources.vCPU
     };
+
+    this.suspended = carbonStar.suspended;
 
     this.createdAt = carbonStar.createdAt;
     this.lastBilled = carbonStar.lastBilled;

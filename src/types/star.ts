@@ -1,32 +1,45 @@
+import type { JavaVersion } from "./create-star";
+
 export type CarbonStarType = {
   _id: string;
   ownerId: string;
-
   name: string;
-  type: string;
-  customJar?: string;
-  version: string;
-  javaVersion: "21" | "17" | "11" | "8";
-  startupCommand?: string;
+
+  config: {
+    type: string;
+    version: string;
+    javaVersion: JavaVersion
+    customJar?: string;
+    startupCommand?: string;
+    maximumRamPercentage: number;
+    additionalFlags: "None" | "Aikar's Flags" | "Velocity Flags";
+    minehutSupport: "None" | "Velocity" | "Waterfall" | "Bukkit";
+    overrideStartup: boolean;
+    automaticUpdating: boolean;
+    simdOperations: boolean;
+    removeUpdateWarnings: boolean;
+    malwareScan: boolean;
+    acceptEula: boolean;
+  };
   
   clientId: string;
   serverId: number;
-  galaxyId: string;
+  galaxyId: number;
 
   ip: string;
   subdomain?: string;
 
   subUsers: {
-    _id: string,
-    clerkId: string,
-    email: string,
-    minecraftUUID: string,
-  }[]
+    _id: string;
+    clerkId: string;
+    email: string;
+    minecraftUUID?: string;
+  }[];
 
   resources: {
-      storage: number;
-      memory: number;
-      vCPU: number;
+    storage: number;
+    memory: number;
+    vCPU: number;
   };
 
   suspended: boolean;

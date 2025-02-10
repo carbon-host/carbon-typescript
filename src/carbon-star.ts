@@ -5,10 +5,10 @@ import type { Carbon } from "./carbon";
 import { FileManager } from "./file-manager";
 import { MinecraftManager } from "./managers/minecraft-manager";
 import { StatManager } from "./managers/stat-manager";
-import { UserManager } from "./stars/users";
-import type { UpdateStarType } from "./types/create-star";
-import type { CarbonStarType, StarResources, StarStatus } from "./types/star";
 import { PortManager } from "./ports";
+import { UserManager } from "./stars/users";
+import type { JavaVersion, UpdateStarType } from "./types/create-star";
+import type { CarbonStarType, StarResources } from "./types/star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -17,27 +17,38 @@ export class CarbonStar {
 
   _id: string;
   ownerId: string;
-
   name: string;
-  type: string;
-  customJar?: string;
-  version: string;
-  javaVersion: "21" | "17" | "11" | "8";
-  startupCommand?: string;
+
+  config: {
+    type: string;
+    version: string;
+    javaVersion: JavaVersion;
+    customJar?: string;
+    startupCommand?: string;
+    maximumRamPercentage: number;
+    additionalFlags: "None" | "Aikar's Flags" | "Velocity Flags";
+    minehutSupport: "None" | "Velocity" | "Waterfall" | "Bukkit";
+    overrideStartup: boolean;
+    automaticUpdating: boolean;
+    simdOperations: boolean;
+    removeUpdateWarnings: boolean;
+    malwareScan: boolean;
+    acceptEula: boolean;
+  };
 
   serverId: number;
   clientId: string;
-  galaxyId: string;
+  galaxyId: number;
 
   ip: string;
   subdomain?: string;
 
   subUsers: {
-    _id: string,
-    clerkId: string,
-    email: string,
-    minecraftUUID: string,
-  }[]
+    _id: string;
+    clerkId: string;
+    email: string;
+    minecraftUUID?: string;
+  }[];
 
   resources: {
     storage: number;
@@ -54,7 +65,6 @@ export class CarbonStar {
 
   constructor(
     carbonClient: Carbon,
-    // apiKey: string,
     carbonStar: CarbonStarType,
   ) {
     this.carbonClient = carbonClient;
@@ -63,13 +73,24 @@ export class CarbonStar {
 
     this._id = carbonStar._id;
     this.ownerId = carbonStar.ownerId;
-
     this.name = carbonStar.name;
-    this.type = carbonStar.type;
-    this.customJar = carbonStar.customJar;
-    this.version = carbonStar.version;
-    this.javaVersion = carbonStar.javaVersion;
-    this.startupCommand = carbonStar.startupCommand;
+
+    this.config = {
+      type: carbonStar.config.type,
+      version: carbonStar.config.version,
+      javaVersion: carbonStar.config.javaVersion,
+      customJar: carbonStar.config.customJar,
+      startupCommand: carbonStar.config.startupCommand,
+      maximumRamPercentage: carbonStar.config.maximumRamPercentage,
+      additionalFlags: carbonStar.config.additionalFlags,
+      minehutSupport: carbonStar.config.minehutSupport,
+      overrideStartup: carbonStar.config.overrideStartup,
+      automaticUpdating: carbonStar.config.automaticUpdating,
+      simdOperations: carbonStar.config.simdOperations,
+      removeUpdateWarnings: carbonStar.config.removeUpdateWarnings,
+      malwareScan: carbonStar.config.malwareScan,
+      acceptEula: carbonStar.config.acceptEula,
+    };
 
     this.serverId = carbonStar.serverId;
     this.clientId = carbonStar.clientId;
@@ -132,9 +153,9 @@ export class CarbonStar {
     }).then((res) => res.data);
   }
 
-  async getWebsocketInfo() {
-    return this.axios.get
-  }
+  // async getWebsocketInfo() {
+  //   return this.axios.get
+  // }
 
   async getResources() {
     return this.axios.get<StarResources>("/resources").then((res) => res.data); 

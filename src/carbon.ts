@@ -15,7 +15,7 @@ export class Carbon {
   constructor({ apiKey, url }: { apiKey: string, url?: string }) {
     this.apiKey = apiKey;
     this.axios = axios.create({
-      baseURL: url || "https://staging.api.carbon.host",
+      baseURL: url || "https://api.carbon.host",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`,

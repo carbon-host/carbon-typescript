@@ -48,7 +48,7 @@ export class FileManager {
     }
 
     async deleteFile(params: { path?: string, paths?: string[] }) {
-        return this.axios.delete("/files", { data: params })
+        return this.axios.delete("/files", { params })
     }
 
     async createFile(parentDirectory: string, fileName: string) {

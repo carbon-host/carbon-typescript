@@ -1,5 +1,14 @@
 # @carbonhost/typescript
 
+## 1.0.1
+
+### Patch Changes
+
+- 51a0f8c: Updted file manager to be complete with all URL methods
+- f692f3a: include serviceName in type and class
+- edd212b: file manager
+- f692f3a: MinecraftManager, fix uptime type
+
 ## 0.0.20
 
 ### Patch Changes

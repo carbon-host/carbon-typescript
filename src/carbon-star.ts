@@ -8,7 +8,7 @@ import { StatManager } from "./managers/stat-manager";
 import { PortManager } from "./ports";
 import { UserManager } from "./stars/users";
 import type { JavaVersion, UpdateStarType } from "./types/create-star";
-import type { CarbonStarType, StarResources } from "./types/star";
+import type { CarbonStarType, CarbonSubdomainType, StarResources } from "./types/star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -41,7 +41,7 @@ export class CarbonStar {
   galaxyId: number;
 
   ip: string;
-  subdomain?: string;
+  subdomain?: CarbonSubdomainType;
 
   subUsers: {
     _id: string;

@@ -1,5 +1,10 @@
 import type { JavaVersion } from "./create-star";
 
+export type CarbonSubdomainType = {
+  _id: string;
+  url: string
+}
+
 export type CarbonStarType = {
   _id: string;
   ownerId: string;
@@ -27,7 +32,7 @@ export type CarbonStarType = {
   galaxyId: number;
 
   ip: string;
-  subdomain?: string;
+  subdomain?: CarbonSubdomainType;
 
   subUsers: {
     _id: string;

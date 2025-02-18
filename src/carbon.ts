@@ -24,7 +24,7 @@ export class Carbon {
   }
 
   async getMe(forceRefresh?: boolean) {
-    return this.axios.get<UserInfo>(`/v1/me${forceRefresh && "?forceRefresh=true"}`).then(res => res.data)
+    return this.axios.get<UserInfo>(`/v1/me${forceRefresh ? "?forceRefresh=true" : ""}`).then(res => res.data)
   }
 
   async createAPIKey({ name, description, type }: CreateAPIKeyType) {

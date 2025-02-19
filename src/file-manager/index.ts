@@ -48,9 +48,11 @@ export class FileManager {
     }
 
     async deleteFile(params: { path?: string, paths?: string[] }) {
+        const formattedPaths = `[${params.paths?.map(path => `"${path}"`).join(",")}]`
+
         return this.axios.delete("/files", { params: {
-            path: params.path,
-            paths: JSON.stringify(params.paths)
+            path: params.path || undefined,
+            paths: formattedPaths || undefined
         } })
     }
 

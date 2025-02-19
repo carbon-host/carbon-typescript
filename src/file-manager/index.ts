@@ -50,7 +50,7 @@ export class FileManager {
     async deleteFile(params: { path?: string, paths?: string[] }) {
         return this.axios.delete("/files", { params: {
             path: params.path,
-            paths: params.paths
+            paths: JSON.stringify(params.paths)
         } })
     }
 

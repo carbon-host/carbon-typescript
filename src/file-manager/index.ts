@@ -48,12 +48,17 @@ export class FileManager {
     }
 
     async deleteFile(params: { path?: string, paths?: string[] }) {
-        const formattedPaths = `[${params.paths?.map(path => `"${path}"`).join(",")}]`
+        const requestParams: { path?: string, paths?: string } = {};
+        
+        if (params.path) {
+            requestParams.path = params.path;
+        }
+        
+        if (params.paths?.length) {
+            requestParams.paths = `[${params.paths.map(path => `"${path}"`).join(",")}]`;
+        }
 
-        return this.axios.delete("/files", { params: {
-            path: params.path || undefined,
-            paths: formattedPaths || undefined
-        } })
+        return this.axios.delete("/files", { params: requestParams })
     }
 
     async createFile(parentDirectory: string, fileName: string) {

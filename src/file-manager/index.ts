@@ -82,4 +82,22 @@ export class FileManager {
     async compressFiles(root: string, files: string[]) {
         return this.axios.post("/files/compress", { root, files })
     }
+
+    async uploadFile(path: string, file: File) {
+
+        // get url
+        const url = await this.axios.get("/files/upload", { params: { path } })
+        .then(res => res.data.url)
+
+
+        // upload file
+        // files form data
+        // directory 
+        const formData = new FormData();
+        formData.append("files", file);
+
+        const updatedURL = `${url}?directory=${path}`;
+
+        return this.axios.post(updatedURL, formData)
+    }
 }

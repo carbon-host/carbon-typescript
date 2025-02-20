@@ -173,23 +173,23 @@ export class CarbonStar {
       .then((res) => res.data);
   }
 
-  async uploadFile(file: File, path: string) {
-    const formData = new FormData();
-    formData.append("file", file);
+  // async uploadFile(file: File, path: string) {
+  //   const formData = new FormData();
+  //   formData.append("file", file);
 
-    return this.axios
-      .post<{ status: string; filePath: string }>("/files/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        params: {
-          path,
-        },
-      })
-      .then((res) => res.data)
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response.data);
-      });
-  }
+  //   return this.axios
+  //     .post<{ status: string; filePath: string }>("/files/upload", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //       params: {
+  //         path,
+  //       },
+  //     })
+  //     .then((res) => res.data)
+  //     .catch((err) => {
+  //       console.log(err);
+  //       console.log(err.response.data);
+  //     });
+  // }
 }

@@ -186,6 +186,10 @@ export class CarbonStar {
           path,
         },
       })
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data);
+      });
   }
 }

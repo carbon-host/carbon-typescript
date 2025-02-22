@@ -5,3 +5,11 @@ export type Port = {
     notes: string | null;
     isDefault: boolean;
 }
+
+
+export type SFTPDetails = {
+    host: string;
+    port: number;
+    username: string;
+    password?: string;
+}

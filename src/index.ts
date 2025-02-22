@@ -9,5 +9,5 @@ export * from "./file-manager/types";
 export * from "./carbon-plugin/types";
 export * from "./backups/types";
 export * from "./invites/types";
-export * from "./stars/users/types"
-export * from "./ports/types";
+export * from "./stars/users/types";
+export * from "./network/types";

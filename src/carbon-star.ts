@@ -5,10 +5,14 @@ import type { Carbon } from "./carbon";
 import { FileManager } from "./file-manager";
 import { MinecraftManager } from "./managers/minecraft-manager";
 import { StatManager } from "./managers/stat-manager";
-import { PortManager } from "./ports";
+import { NetworkManager } from "./network";
 import { UserManager } from "./stars/users";
 import type { JavaVersion, UpdateStarType } from "./types/create-star";
-import type { CarbonStarType, CarbonSubdomainType, StarResources } from "./types/star";
+import type {
+  CarbonStarType,
+  CarbonSubdomainType,
+  StarResources,
+} from "./types/star";
 
 export class CarbonStar {
   // @ts-ignore
@@ -63,13 +67,10 @@ export class CarbonStar {
 
   billingCycle: "monthly" | "hourly";
 
-  constructor(
-    carbonClient: Carbon,
-    carbonStar: CarbonStarType,
-  ) {
+  constructor(carbonClient: Carbon, carbonStar: CarbonStarType) {
     this.carbonClient = carbonClient;
-    this.axios = axios.create(carbonClient.getAxios().defaults)
-    this.axios.defaults.baseURL = `${this.axios.defaults.baseURL}/v1/stars/${carbonStar._id}`
+    this.axios = axios.create(carbonClient.getAxios().defaults);
+    this.axios.defaults.baseURL = `${this.axios.defaults.baseURL}/v1/stars/${carbonStar._id}`;
 
     this._id = carbonStar._id;
     this.ownerId = carbonStar.ownerId;
@@ -104,7 +105,7 @@ export class CarbonStar {
     this.resources = {
       storage: carbonStar.resources.storage,
       memory: carbonStar.resources.memory,
-      vCPU: carbonStar.resources.vCPU
+      vCPU: carbonStar.resources.vCPU,
     };
 
     this.suspended = carbonStar.suspended;
@@ -116,7 +117,7 @@ export class CarbonStar {
   }
 
   get users() {
-    return new UserManager(this, this.axios)
+    return new UserManager(this, this.axios);
   }
 
   get minecraft() {
@@ -135,22 +136,31 @@ export class CarbonStar {
     return new BackupManager(this, this.axios, this.carbonClient.getAxios());
   }
 
-  get ports() {
-    return new PortManager(this, this.axios);
+  get network() {
+    return new NetworkManager(this, this.axios);
   }
 
   async delete() {
-    return this.carbonClient.getAxios().delete(`/v1/stars/${this._id}`).then((res) => res.data);
+    return this.carbonClient
+      .getAxios()
+      .delete(`/v1/stars/${this._id}`)
+      .then((res) => res.data);
   }
 
   async update(request: UpdateStarType) {
-    return this.carbonClient.getAxios().patch(`/v1/stars/${this._id}`, request).then((res) => res.data);
+    return this.carbonClient
+      .getAxios()
+      .patch(`/v1/stars/${this._id}`, request)
+      .then((res) => res.data);
   }
 
   async rename(name: string) {
-    return this.carbonClient.getAxios().put(`/v1/stars/${this._id}/name`, {
-      name,
-    }).then((res) => res.data);
+    return this.carbonClient
+      .getAxios()
+      .put(`/v1/stars/${this._id}/name`, {
+        name,
+      })
+      .then((res) => res.data);
   }
 
   // async getWebsocketInfo() {
@@ -158,7 +168,7 @@ export class CarbonStar {
   // }
 
   async getResources() {
-    return this.axios.get<StarResources>("/resources").then((res) => res.data); 
+    return this.axios.get<StarResources>("/resources").then((res) => res.data);
   }
 
   async setPower(action: "start" | "stop" | "restart" | "kill") {

@@ -1,8 +1,8 @@
 import type { AxiosInstance } from "axios";
 import type { CarbonStar } from "../carbon-star";
-import type { Port } from "./types";
+import type { Port, SFTPDetails } from "./types";
 
-export class PortManager {
+export class NetworkManager {
     private star: CarbonStar;
     private axios: AxiosInstance;
 
@@ -21,6 +21,10 @@ export class PortManager {
 
     async createPort(notes: string) {
         return this.axios.post<Port>("/ports", { notes }).then(res => res.data)
+    }
+
+    async getSFTPDetails() {
+        return this.axios.get<SFTPDetails>("/network/sftp").then(res => res.data)
     }
 
 }

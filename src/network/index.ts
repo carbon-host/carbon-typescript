@@ -12,15 +12,15 @@ export class NetworkManager {
     }
 
     async getPorts() {
-        return this.axios.get<Port[]>("/ports").then(res => res.data)
+        return this.axios.get<Port[]>("/network/ports").then(res => res.data)
     }
 
     async deletePort(portId: string) {
-        return this.axios.delete(`/ports/${portId}`).then(res => res.data)
+        return this.axios.delete(`/network/ports/${portId}`).then(res => res.data)
     }
 
     async createPort(notes: string) {
-        return this.axios.post<Port>("/ports", { notes }).then(res => res.data)
+        return this.axios.post<Port>("/network/ports", { notes }).then(res => res.data)
     }
 
     async getSFTPDetails() {

@@ -13,3 +13,8 @@ export type SFTPDetails = {
     username: string;
     password?: string;
 }
+
+export type SFTPAccountDetails = {
+    username: string;
+    password: string;
+}

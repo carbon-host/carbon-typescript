@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 import type { CarbonStar } from "../carbon-star";
-import type { Port, SFTPDetails } from "./types";
+import type { Port, SFTPAccountDetails, SFTPDetails } from "./types";
 
 export class NetworkManager {
     private star: CarbonStar;
@@ -25,6 +25,10 @@ export class NetworkManager {
 
     async getSFTPDetails() {
         return this.axios.get<SFTPDetails>("/network/sftp").then(res => res.data)
+    }
+
+    async resetSFTPPassword() {
+        return this.axios.post<SFTPAccountDetails>("/network/sftp/reset-password").then(res => res.data)
     }
 
 }

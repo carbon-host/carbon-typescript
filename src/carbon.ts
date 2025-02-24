@@ -43,16 +43,20 @@ export class Carbon {
     return new InviteManager(this.axios);
   }
 
-  private async fetchStars() {
-    return this.axios.get<CarbonStarType[]>("/v1/stars").then(res => res.data)
+  private async fetchStars(saveToCache?: boolean) {
+    return this.axios.get<CarbonStarType[]>("/v1/stars", {
+      params: {
+        saveToCache: saveToCache ? "true" : "false",
+      },
+    }).then(res => res.data)
   }
 
   private async fetchStar(id: string) {
     return this.axios.get<CarbonStarType>(`/v1/stars/${id}`).then(res => res.data)
   }
 
-  async getStars(): Promise<CarbonStar[]> {
-    const stars = await this.fetchStars();
+  async getStars(saveToCache?: boolean): Promise<CarbonStar[]> {
+    const stars = await this.fetchStars(saveToCache);
     return stars.map(star => new CarbonStar(this, star));
   }
 

@@ -163,9 +163,16 @@ export class CarbonStar {
       .then((res) => res.data);
   }
 
-  // async getWebsocketInfo() {
-  //   return this.axios.get
-  // }
+  async stopBilling(reason: string) {
+    return this.carbonClient
+      .getAxios()
+      .post("/stop-billing", {
+        reason,
+      })
+      .then((res) => res.data);
+  }
+
+
 
   async getResources() {
     return this.axios.get<StarResources>("/resources").then((res) => res.data);

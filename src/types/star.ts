@@ -51,6 +51,10 @@ export type CarbonStarType = {
 
   lastBilled?: Date;
   billingCycle: "monthly" | "hourly";
+  billingEnabled: boolean;
+  billingStoppedAt?: Date;
+  billingStoppedReason?: string;
+  
 
   createdAt: Date;
 }

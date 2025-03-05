@@ -166,7 +166,7 @@ export class CarbonStar {
   async stopBilling(reason: string) {
     return this.carbonClient
       .getAxios()
-      .post("/stop-billing", {
+      .post(`/v1/stars/${this._id}/stop-billing`, {
         reason,
       })
       .then((res) => res.data);

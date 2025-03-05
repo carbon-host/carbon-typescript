@@ -63,9 +63,12 @@ export class CarbonStar {
   suspended: boolean;
 
   createdAt: Date;
-  lastBilled?: Date;
 
+  lastBilled?: Date;
   billingCycle: "monthly" | "hourly";
+  billingEnabled: boolean;
+  billingStoppedAt?: Date;
+  billingStoppedReason?: string;
 
   constructor(carbonClient: Carbon, carbonStar: CarbonStarType) {
     this.carbonClient = carbonClient;
@@ -111,9 +114,12 @@ export class CarbonStar {
     this.suspended = carbonStar.suspended;
 
     this.createdAt = carbonStar.createdAt;
+    
     this.lastBilled = carbonStar.lastBilled;
-
     this.billingCycle = carbonStar.billingCycle;
+    this.billingEnabled = carbonStar.billingEnabled;
+    this.billingStoppedAt = carbonStar.billingStoppedAt;
+    this.billingStoppedReason = carbonStar.billingStoppedReason;
   }
 
   get users() {
